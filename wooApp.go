@@ -28,7 +28,7 @@ func init() {
 
 func listenAndServerByMe(addr string, handler http.Handler) error {
 	my_server := &http.Server{Addr: addr, Handler: handler}
-	fmt.Printf("Server started, listen on port: %s\n", addr)
+	fmt.Printf("Server started, listen on port %s\n", addr)
 	return my_server.ListenAndServe()
 }
 
@@ -37,6 +37,8 @@ func main() {
 	defer DB.Close()
 
 	http.HandleFunc("/", routerHandlers.HomePage)
+	http.HandleFunc("/login", routerHandlers.LoginPage)
+	http.HandleFunc("/signup",routerHandlers.SignupPage)
 	lerr := listenAndServerByMe(":8080", nil)
 	if lerr != nil {
 		panic(lerr.Error())
