@@ -17,12 +17,12 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 	}
 	fmt.Println("PPath: ", PPath)
 	fmt.Println(PPath + "/views/index.html")
-	http.ServeFile(res, req, PPath + "/views/index.html")
+	http.ServeFile(res, req, PPath+"/views/index.html")
 }
 
 func SignupPage(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath + "/views/signup.html")
+		http.ServeFile(res, req, PPath+"/views/signup.html")
 		return
 	}
 
@@ -67,7 +67,7 @@ func SignupPage(res http.ResponseWriter, req *http.Request) {
 
 func LoginPage(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath + "/views/login.html")
+		http.ServeFile(res, req, PPath+"/views/login.html")
 		return
 	}
 
@@ -86,6 +86,18 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 
 	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
 	if err != nil {
+		http.Redirect(res, req, "/login", 301)
+	}
+
+	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
+	if err != nil {
+		http.Redirect(res, req, "/login", 301)
+		return
+	}
+
+	logindate := time.Now().Local()
+	_, err = updateDatehandler.Exec(logindate, username)
+	if err != nil{
 		http.Redirect(res, req, "/login", 301)
 	}
 
