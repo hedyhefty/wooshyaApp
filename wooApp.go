@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Gopractise/wooshyaApp/routerHandlers"
+	"wooshyaApp/routerHandlers"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
