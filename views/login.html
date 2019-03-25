@@ -1,15 +1,57 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <!--link rel="stylesheet" type="text/css" href="cssfiles/trycss.css"-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .container{
+            margin-top: 12%;
+        }
+        .btnSubmit {
+            width: 50%;
+            border-radius: 1rem;
+            padding: 1.5%;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #fff;
+            background-color: #0062cc;
+        }
+
+        .ForgetPwd {
+            color: #0062cc;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Sign up</h1>
-    <form method="POST" action="login">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="Submit">
-    </form>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">WOOSHYA!</a>
+</nav>
+<div class="container text-center">
+    <div class="container col-md-5">
+        <h3>LOGIN</h3>
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="LOGIN!">
+            </div>
+            <div class="form-group">
+                <a href="#" class="ForgetPwd">Forget Password?</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
 </body>
 </html>

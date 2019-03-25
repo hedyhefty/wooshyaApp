@@ -3,19 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <!--link rel="stylesheet" type="text/css" href="cssfiles/trycss.css"-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .container{
+            margin-top: 5%;
+        }
+        .btnSubmit {
+            width: 50%;
+            border-radius: 1rem;
+            padding: 1.5%;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #fff;
+            background-color: #0062cc;
+        }
+
+
+    </style>
 </head>
 <body>
-    <h1>Sign up</h1>
-    <form method="POST" action="/signup">
-        <input type="text" name="username">
-        <input type="password" name="password">
-        <input type="text" name="mailaddress">
-        <input type="text" name="collegename">
-        <input type="text" name="degree">
-        <input type="text" name="department">
-        <input type="text" name="major">
-        <input type="text" name="graduatedate">
-        <input type="submit" name="Submit">
-    </form>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">WOOSHYA!</a>
+</nav>
+
+<div class="container text-center">
+    <div class="container col-md-5">
+        <h3>Sign Up your account!</h3>
+        <form method="POST" action="/signup">
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="password">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="mailaddress" placeholder="mail@box.com">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="collegename" placeholder="collegename">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="degree" placeholder="degree">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="department" placeholder="department">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="major" placeholder="major">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="graduatedate" placeholder="your graduate date">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="Submit!">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--h1>Sign up</h1>
+<form method="POST" action="/signup">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <input type="text" name="mailaddress">
+    <input type="text" name="collegename">
+    <input type="text" name="degree">
+    <input type="text" name="department">
+    <input type="text" name="major">
+    <input type="text" name="graduatedate">
+    <input type="submit" name="Submit">
+</form-->
 </body>
 </html>
