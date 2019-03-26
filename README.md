@@ -4,14 +4,14 @@
 * designed by ST Wang and ZZ Zhang
 
 ### init setting:
-you have to install mysql and go get the package below:
+* you have to install mysql and go get the package below:
 
 ```bash
 $ go get github.com/go-sql-driver/mysql
 
 $ go get golang.org/x/crypto/bcrypt
 ```
-then create the table in mysql:
+* then create the table in mysql:
 
 ```sql
 CREATE TABLE stdusers(
