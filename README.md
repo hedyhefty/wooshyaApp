@@ -27,8 +27,8 @@ CREATE TABLE stdusers(
     lastlogindate DATE
 );
 
-create table companyuser(
-id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE companyuser(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
     password VARCHAR(120),
     mailaddress VARCHAR(50),
