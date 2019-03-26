@@ -7,9 +7,9 @@ designed by ST Wang and ZZ Zhang
 you have to install mysql and go get the package below:
 
 ```bash
-$ go get -u github.com/go-sql-driver/mysql
-
 $ go get github.com/go-sql-driver/mysql
+
+$ go get golang.org/x/crypto/bcrypt
 ```
 then create the table in mysql:
 
