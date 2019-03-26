@@ -3,7 +3,7 @@ website for international student job seeking
 
 designed by ST Wang and ZZ Zhang
 
-## init setting:
+### init setting:
 you have to install mysql and go get the package below:
 
 ```bash
