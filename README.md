@@ -35,5 +35,5 @@ CREATE TABLE companyuser(
     companyname VARCHAR(50),
     telephonenumber VARCHAR(50),
     lastlogindate DATE
-)
+);
 ```
