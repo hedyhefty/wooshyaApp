@@ -13,20 +13,20 @@
 <nav class="navbar bg-dark navbar-dark text-white">
     <a class="navbar-brand">WOOSHYA!</a>
     <div class="pull-right">
-        <button onclick="stdLogin()" id="loginbtn" class="btn btn-secondary">LOGIN</button>
-        <button onclick="stdSignUp()" id="signupbtn" class="btn btn-secondary">SIGN UP</button>
-        <button onclick="coHomePage()" id="coHPbtn" class="btn btn-secondary">Company User</button>
+        <button onclick="coLogin()" id="coLoginbtn" class="btn btn-secondary">LOGIN</button>
+        <button onclick="coSignUp()" id="cpSignupbtn" class="btn btn-secondary">SIGN UP</button>
+        <button onclick="stdHomePage()" id="stdHPbtn" class="btn btn-secondary">Student User</button>
     </div>
 </nav>
 <script>
-    function stdLogin() {
-        location.href = "/login"
+    function coLogin() {
+        location.href = "/companyLogin"
     }
-    function stdSignUp() {
-        location.href = "/signup"
+    function coSignUp() {
+        location.href = "/companySignup"
     }
-    function coHomePage() {
-        location.href = "/companyIndex"
+    function stdHomePage() {
+        location.href = "/"
     }
 </script>
 

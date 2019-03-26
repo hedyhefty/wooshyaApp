@@ -1,11 +1,12 @@
 package main
 
 import (
-	"wooshyaApp/routerHandlers"
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"net/http"
+	"wooshyaApp/routerHandlers"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var DB *sql.DB
@@ -38,7 +39,9 @@ func main() {
 
 	http.HandleFunc("/", routerHandlers.HomePage)
 	http.HandleFunc("/login", routerHandlers.LoginPage)
-	http.HandleFunc("/signup",routerHandlers.SignupPage)
+	http.HandleFunc("/signup", routerHandlers.SignupPage)
+	http.HandleFunc("/companyIndex", routerHandlers.CompanyHomePage)
+	http.HandleFunc("/companyLogin", routerHandlers.CompanyLogin)
 	lerr := listenAndServerByMe(":8080", nil)
 	if lerr != nil {
 		panic(lerr.Error())

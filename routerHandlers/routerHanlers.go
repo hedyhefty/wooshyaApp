@@ -1,105 +1,112 @@
 package routerHandlers
 
-import (
-	"database/sql"
-	"fmt"
-	"golang.org/x/crypto/bcrypt"
-	"net/http"
-	"time"
-)
+// import (
+// 	"database/sql"
+// 	"fmt"
+// 	"net/http"
+// 	"time"
 
-func HomePage(res http.ResponseWriter, req *http.Request) {
-	err := DB.Ping()
-	if err != nil {
-		panic(err.Error())
-	} else {
-		println("I know u DB.")
-	}
-	fmt.Println("PPath: ", PPath)
-	fmt.Println(PPath + "/views/index.html")
-	http.ServeFile(res, req, PPath+"/views/index.html")
-}
+// 	"golang.org/x/crypto/bcrypt"
+// )
 
-func SignupPage(res http.ResponseWriter, req *http.Request) {
-	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath+"/views/signup.html")
-		return
-	}
+// func HomePage(res http.ResponseWriter, req *http.Request) {
+// 	err := DB.Ping()
+// 	if err != nil {
+// 		panic(err.Error())
+// 	} else {
+// 		println("I know u DB.")
+// 	}
+// 	fmt.Println("PPath: ", PPath)
+// 	fmt.Println(PPath + "/views/index.html")
+// 	http.ServeFile(res, req, PPath+"/views/index.html")
+// }
 
-	username := req.FormValue("username")
-	password := req.FormValue("password")
-	mailaddress := req.FormValue("mailaddress")
-	collegename := req.FormValue("collegename")
-	degree := req.FormValue("degree")
-	department := req.FormValue("department")
-	major := req.FormValue("major")
-	graduatedate := req.FormValue("graduatedate")
-	lastlogindate := time.Now().Local()
+// func SignupPage(res http.ResponseWriter, req *http.Request) {
+// 	if (*req).Method != "POST" {
+// 		http.ServeFile(res, req, PPath+"/views/signup.html")
+// 		return
+// 	}
 
-	var stduser string
-	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", username).Scan(&stduser)
-	switch {
-	case err == sql.ErrNoRows:
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-		if err != nil {
-			http.Error(res, "Server error, unable to create account", 500)
-			return
-		}
+// 	username := req.FormValue("username")
+// 	password := req.FormValue("password")
+// 	mailaddress := req.FormValue("mailaddress")
+// 	collegename := req.FormValue("collegename")
+// 	degree := req.FormValue("degree")
+// 	department := req.FormValue("department")
+// 	major := req.FormValue("major")
+// 	graduatedate := req.FormValue("graduatedate")
+// 	lastlogindate := time.Now().Local()
 
-		_, err = DB.Exec("INSERT INTO stdusers(username,password,mailaddress,collegename,degree,department,major,graduatedate,lastlogindate) VALUES(?,?,?,?,?,?,?,?,?)",
-			username, hashedPassword, mailaddress, collegename, degree, department, major, graduatedate, lastlogindate)
+// 	var stduser string
+// 	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", username).Scan(&stduser)
+// 	fmt.Printf("Query error type: %s\n", err)
 
-		if err != nil {
-			http.Error(res, "Server error, unable to create account", 500)
-			return
-		}
-		res.Write([]byte("User Created!"))
-		return
+// 	switch {
+// 	case err == sql.ErrNoRows:
+// 		// Username not exists
+// 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+// 		if err != nil {
+// 			http.Error(res, "Server error, unable to create account", 500)
+// 			return
+// 		}
 
-	case err != nil:
-		http.Error(res, "Server error, unable to create account", 500)
-		return
+// 		_, err = DB.Exec("INSERT INTO stdusers(username,password,mailaddress,collegename,degree,department,major,graduatedate,lastlogindate) VALUES(?,?,?,?,?,?,?,?,?)",
+// 			username, hashedPassword, mailaddress, collegename, degree, department, major, graduatedate, lastlogindate)
 
-	default:
-		http.Redirect(res, req, "/", 301)
-	}
-}
+// 		if err != nil {
+// 			http.Error(res, "Server error, unable to create account", 500)
+// 			return
+// 		}
+// 		res.Write([]byte("User Created!"))
+// 		http.Redirect(res, req, "/", 200)
+// 		// return
 
-func LoginPage(res http.ResponseWriter, req *http.Request) {
-	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath+"/views/login.html")
-		return
-	}
+// 	case err != nil:
+// 		// Other error
+// 		http.Error(res, "Server error, unable to create account", 500)
+// 		return
 
-	username := req.FormValue("username")
-	password := req.FormValue("password")
+// 	default:
+// 		// Username already exists
+// 		http.Redirect(res, req, "/signup", 301)
+// 	}
+// }
 
-	var databaseUsername string
-	var databasePassword string
+// func LoginPage(res http.ResponseWriter, req *http.Request) {
+// 	if (*req).Method != "POST" {
+// 		http.ServeFile(res, req, PPath+"/views/login.html")
+// 		return
+// 	}
 
-	err := DB.QueryRow("SELECT username,password FROM stdusers where username = ?", username).Scan(&databaseUsername, &databasePassword)
+// 	username := req.FormValue("username")
+// 	password := req.FormValue("password")
 
-	if err != nil {
-		http.Redirect(res, req, "/login", 301)
-		return
-	}
+// 	var databaseUsername string
+// 	var databasePassword string
 
-	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
-	if err != nil {
-		http.Redirect(res, req, "/login", 301)
-	}
+// 	err := DB.QueryRow("SELECT username,password FROM stdusers where username = ?", username).Scan(&databaseUsername, &databasePassword)
 
-	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
-	if err != nil {
-		http.Redirect(res, req, "/login", 301)
-		return
-	}
+// 	if err != nil {
+// 		http.Redirect(res, req, "/login", 301)
+// 		return
+// 	}
 
-	logindate := time.Now().Local()
-	_, err = updateDatehandler.Exec(logindate, username)
-	if err != nil{
-		http.Redirect(res, req, "/login", 301)
-	}
+// 	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
+// 	if err != nil {
+// 		http.Redirect(res, req, "/login", 301)
+// 	}
 
-	res.Write([]byte("hello " + databaseUsername))
-}
+// 	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
+// 	if err != nil {
+// 		http.Redirect(res, req, "/login", 301)
+// 		return
+// 	}
+
+// 	logindate := time.Now().Local()
+// 	_, err = updateDatehandler.Exec(logindate, username)
+// 	if err != nil {
+// 		http.Redirect(res, req, "/login", 301)
+// 	}
+
+// 	res.Write([]byte("hello " + databaseUsername))
+// }

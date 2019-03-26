@@ -26,4 +26,14 @@ CREATE TABLE stdusers(
     graduatedate(50),
     lastlogindate DATE
 );
+
+create table companyuser(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(120),
+    mailaddress VARCHAR(50),
+    companyname VARCHAR(50),
+    telephonenumber VARCHAR(50),
+    lastlogindate DATE
+)
 ```
