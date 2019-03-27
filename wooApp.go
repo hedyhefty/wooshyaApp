@@ -11,6 +11,7 @@ import (
 
 var DB *sql.DB
 
+
 func init() {
 	//start the connection to the DB(mysql).
 	DB, err := sql.Open("mysql", "root:Pi3141592653@tcp(127.0.0.1:3306)/wootestdb")
