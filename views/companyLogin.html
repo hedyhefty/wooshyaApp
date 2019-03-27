@@ -1,14 +1,16 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>WOOSHYA! FOR COMPANY USER</title>
     <!--link rel="stylesheet" type="text/css" href="cssfiles/trycss.css"-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
-        .container{
+        .container {
             margin-top: 12%;
         }
+
         .btnSubmit {
             width: 50%;
             border-radius: 1rem;
@@ -17,7 +19,7 @@
             cursor: pointer;
             font-weight: 600;
             color: #fff;
-            background-color: #0062cc;
+            background-color: #0000ff;
         }
 
         .ForgetPwd {
@@ -25,33 +27,52 @@
             font-weight: 600;
             text-decoration: none;
         }
-
     </style>
 </head>
+
 <body>
-<nav class="navbar navbar-dark bg-dark text-white">
-    <a class="navbar-brand" href="/">WOOSHYA!</a>
-</nav>
-<div class="container text-center">
-    <div class="container col-md-5">
-        <h3>Company User Login</h3>
-        <form method="POST" action="/companyLogin">
-            <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btnSubmit" value="LOGIN!">
-            </div>
-            <div class="form-group">
-                <a href="#" class="ForgetPwd">Forget Password?</a>
-            </div>
-        </form>
+    <nav class="navbar bg-dark navbar-dark text-white">
+        <nav class="navbar navbar-dark bg-dark text-white">
+            <a class="navbar-brand" href="/companyIndex">WOOSHYA! For Company User</a>
+        </nav>
+        <div class="pull-right">
+            <button onclick="coLogin()" id="coLoginbtn" class="btn btn-secondary">LOGIN</button>
+            <button onclick="coSignUp()" id="cpSignupbtn" class="btn btn-secondary">SIGN UP</button>
+            <button onclick="stdHomePage()" id="stdHPbtn" class="btn btn-secondary">Student User</button>
+        </div>
+    </nav>
+    <script>
+        function coLogin() {
+            location.href = "/companyLogin"
+        }
+        function coSignUp() {
+            location.href = "/companySignup"
+        }
+        function stdHomePage() {
+            location.href = "/"
+        }
+    </script>
+    <div class="container text-center">
+        <div class="container col-md-5">
+            <h3>Company User Login</h3>
+            <form method="POST" action="/companyLogin">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="LOGIN!">
+                </div>
+                <div class="form-group">
+                    <a href="#" class="ForgetPwd">Forget Password?</a>
+                </div>
+            </form>
+        </div>
+
     </div>
 
-</div>
-
 </body>
+
 </html>
