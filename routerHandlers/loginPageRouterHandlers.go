@@ -17,6 +17,8 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 	username := req.FormValue("username")
 	password := req.FormValue("password")
 
+	fmt.Printf("password: %s", password)
+
 	var databaseUsername string
 	var databasePassword string
 
@@ -24,8 +26,7 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		// todo: add a info box including "Username not existed"
-		//http.Redirect(res, req, "/login", 301)
-		http.Error(res,"Cannot Login",500)
+		http.Redirect(res, req, "/login", 301)
 		return
 	}
 
@@ -33,25 +34,20 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 		[]byte(password))
 	if err != nil {
 		// todo: add a info box including "Wrong password"
-		//http.Redirect(res, req, "/login", 301)
-		http.Error(res,"Cannot Login",500)
-		return
+		http.Redirect(res, req, "/login", 301)
 	}
 
 	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
 	if err != nil {
 		// todo: add a info box to inform loginDate error
-		//http.Redirect(res, req, "/login", 301)
-		http.Error(res,"Cannot Login",500)
+		http.Redirect(res, req, "/login", 301)
 		return
 	}
 
 	logindate := time.Now().Local()
 	_, err = updateDatehandler.Exec(logindate, username)
 	if err != nil {
-		//http.Redirect(res, req, "/login", 301)
-		http.Error(res,"Cannot Login",500)
-		return
+		http.Redirect(res, req, "/login", 301)
 	}
 
 	expiration := time.Now()
@@ -59,15 +55,12 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 	cookie := http.Cookie{Name: "username", Value: username, Expires: expiration}
 	fmt.Println("Setting cookies... cookie: ", cookie)
 
+
 	http.SetCookie(res, &cookie)
 
-	session := Session{Username: username, Connection: true}
+	session := Session{Username:username,Connection:true}
 	SessionMap[username] = &session
 	session.StartSession()
-	go session.EndSession()
 
-	http.Redirect(res, req, "/", http.StatusSeeOther)
-	return
-
-	//res.Write([]byte("hello " + databaseUsername))
+	res.Write([]byte("hello " + databaseUsername))
 }
