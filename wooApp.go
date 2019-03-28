@@ -9,6 +9,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+//test contributer
 var DB *sql.DB
 
 func init() {
@@ -18,6 +19,7 @@ func init() {
 		panic(err.Error())
 	}
 	fmt.Println("Mysql DB successfully connected.")
+	fmt.Println("test")
 
 	err = DB.Ping()
 	if err != nil {
