@@ -19,7 +19,6 @@ func init() {
 		panic(err.Error())
 	}
 	fmt.Println("Mysql DB successfully connected.")
-	fmt.Println("test")
 
 	err = DB.Ping()
 	if err != nil {
