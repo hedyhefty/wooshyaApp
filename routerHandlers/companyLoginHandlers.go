@@ -1,6 +1,7 @@
 package routerHandlers
 
 import (
+	"html/template"
 	"net/http"
 	"time"
 
@@ -9,7 +10,22 @@ import (
 
 func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath+"/views/companyLogin.html")
+
+		//by st
+		cpylogintpl, err := template.ParseFiles(PPath+"/views/companyLogin.html", PPath+"/views/bootstrapHeader.html")
+		if err != nil {
+			panic(err.Error())
+			return
+		}
+
+		err = cpylogintpl.Execute(res, nil)
+		if err != nil {
+			panic(err.Error())
+			return
+		}
+		//
+
+		//http.ServeFile(res, req, PPath+"/views/companyLogin.html")
 		return
 	}
 

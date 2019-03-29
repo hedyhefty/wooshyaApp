@@ -3,6 +3,7 @@ package routerHandlers
 import (
 	"database/sql"
 	"fmt"
+	"html/template"
 	"net/http"
 	"time"
 
@@ -11,7 +12,17 @@ import (
 
 func SignupPage(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath+"/views/signup.html")
+		signuptpl, err := template.ParseFiles(PPath+"/views/signup.html", PPath+"/views/bootstrapHeader.html")
+		if err != nil {
+			panic(err.Error())
+			return
+		}
+		err = signuptpl.Execute(res, nil)
+		if err != nil {
+			panic(err.Error())
+			return
+		}
+		//http.ServeFile(res, req, PPath+"/views/signup.html")
 		return
 	}
 

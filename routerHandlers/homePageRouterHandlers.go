@@ -18,7 +18,7 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 
 	cookie, err := req.Cookie("username")
 
-	indextplhandler, err := template.ParseFiles(PPath+"/views/index.html")
+	indextplhandler, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
 
 	var indextpl Indextpl
 
@@ -32,7 +32,7 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 			//Set username
 			indextpl.Username = cookie.Value
 
-			fmt.Println("username: ",indextpl.Username)
+			fmt.Println("username: ", indextpl.Username)
 			if session.Connection {
 				status = "Online"
 				indextpl.IsOnline = true
@@ -50,5 +50,9 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 		}
 	}
 
-	indextplhandler.Execute(res, indextpl)
+	err = indextplhandler.Execute(res, indextpl)
+	if err != nil {
+		panic(err.Error())
+		return
+	}
 }

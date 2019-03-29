@@ -2,6 +2,7 @@ package routerHandlers
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 	"time"
 
@@ -10,7 +11,17 @@ import (
 
 func LoginPage(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		http.ServeFile(res, req, PPath+"/views/login.html")
+		logintpl, err := template.ParseFiles(PPath + "/views/login.html", PPath + "/views/bootstrapHeader.html")
+		if err != nil{
+			panic(err.Error())
+			return
+		}
+		err = logintpl.Execute(res, nil)
+		if err != nil {
+			panic(err.Error())
+			return
+		}
+		//http.ServeFile(res, req, PPath+"/views/login.html")
 		return
 	}
 
