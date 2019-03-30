@@ -29,21 +29,19 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	companyName := req.FormValue("companyname")
+	username := req.FormValue("username")
 	password := req.FormValue("password")
 
-	var databaseCompanyName string
 	var databasePassword string
 
-	err := DB.QueryRow("select companyname, password from companyuser where companyname = ?", companyName).Scan(&databaseCompanyName, &databasePassword)
+	err := DB.QueryRow("select password from companyuser where username = ?", username).Scan(&databasePassword)
 	if err != nil {
 		// todo: add a info box including "Username not existed"
 		http.Redirect(res, req, "/companyLogin", 301)
 		return
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(databasePassword),
-		[]byte(password))
+	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
 	if err != nil {
 		// todo: add a info box including "Wrong password"
 		http.Redirect(res, req, "/companyLogin", 301)
@@ -57,10 +55,18 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 	}
 
 	logindate := time.Now().Local()
-	_, err = updateDatehandler.Exec(logindate, companyName)
+	_, err = updateDatehandler.Exec(logindate, username)
 	if err != nil {
 		http.Redirect(res, req, "/companyLogin", 301)
+		return
 	}
 
-	res.Write([]byte("hello " + databaseCompanyName))
+	session := Session{Username: username, Connection: true, SessionType: Company}
+	session.StartSession()
+	go session.EndSession()
+
+	cookies := session.SetCookies()
+	http.SetCookie(res, &cookies)
+
+	http.Redirect(res, req, "/companyIndex", http.StatusSeeOther)
 }

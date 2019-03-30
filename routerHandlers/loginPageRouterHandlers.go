@@ -1,7 +1,6 @@
 package routerHandlers
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"time"
@@ -28,10 +27,9 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 	username := req.FormValue("username")
 	password := req.FormValue("password")
 
-	var databaseUsername string
 	var databasePassword string
 
-	err := DB.QueryRow("SELECT username,password FROM stdusers where username = ?", username).Scan(&databaseUsername, &databasePassword)
+	err := DB.QueryRow("SELECT password FROM stdusers where username = ?", username).Scan(&databasePassword)
 
 	if err != nil {
 		// todo: add a info box including "Username not existed"
@@ -65,20 +63,19 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	expiration := time.Now()
-	expiration = expiration.AddDate(0, 0, 7)
-	cookie := http.Cookie{Name: "username", Value: username, Expires: expiration}
-	fmt.Println("Setting cookies... cookie: ", cookie)
+	//expiration := time.Now()
+	//expiration = expiration.AddDate(0, 0, 7)
+	//cookie := http.Cookie{Name: "username", Value: username, Expires: expiration}
+	//fmt.Println("Setting cookies... cookie: ", cookie)
 
-	http.SetCookie(res, &cookie)
+	//http.SetCookie(res, &cookie)
 
-	session := Session{Username: username, Connection: true}
-	SessionMap[username] = &session
-	session.StartSession()
-	go session.EndSession()
+	session := Session{Username: username, Connection: true, SessionType:Student}
+	(&session).StartSession()
+	go (&session).EndSession()
+
+	cookies := session.SetCookies()
+	http.SetCookie(res, &cookies)
 
 	http.Redirect(res, req, "/", http.StatusSeeOther)
-	return
-
-	//res.Write([]byte("hello " + databaseUsername))
 }

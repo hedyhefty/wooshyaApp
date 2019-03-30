@@ -16,23 +16,29 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 	//fmt.Println("PPath: ", PPath)
 	//fmt.Println(PPath + "/views/index.html")
 
-	cookie, err := req.Cookie("username")
-
 	indextplhandler, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
+	if err != nil {
+		fmt.Println("failed to load template.")
+		return
+	}
 
 	var indextpl Indextpl
 
+	cookie, err := req.Cookie("SessionID")
+
 	if err != nil {
 		fmt.Println("No cookies.")
+		indextpl.IsOnline = false
 	} else {
 		fmt.Printf("%s=%s\r\n", cookie.Name, cookie.Value)
-		if SessionMap[cookie.Value] != nil {
+		if (SessionMap[cookie.Value] != nil) && (SessionMap[cookie.Value].SessionType == Student) {
 			session := *SessionMap[cookie.Value]
 			var status string
 			//Set username
-			indextpl.Username = cookie.Value
+			indextpl.Username = session.Username
 
 			fmt.Println("username: ", indextpl.Username)
+			fmt.Println("SessionType: ",session.SessionType)
 			if session.Connection {
 				status = "Online"
 				indextpl.IsOnline = true
@@ -43,10 +49,12 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 			fmt.Printf("Session status of %s is: %s\n", session.Username, status)
 		} else {
 			indextpl.IsOnline = false
-			indextpl.Username = ""
-			session := Session{cookie.Value, false}
-			SessionMap[cookie.Value] = &session
-			fmt.Printf("Create session for %s\n", cookie.Value)
+			fmt.Println("Unknown Cookies value.")
+			//indextpl.Username = ""
+			//session := Session{cookie.Value, false}
+			//SessionMap[cookie.Value] = &session
+			//fmt.Printf("Create session for %s\n", cookie.Value)
+
 		}
 	}
 

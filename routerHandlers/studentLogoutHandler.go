@@ -6,7 +6,7 @@ import (
 )
 
 func StdLogout(res http.ResponseWriter, req *http.Request) {
-	cookie, err := req.Cookie("username")
+	cookie, err := req.Cookie("SessionID")
 
 	if err != nil {
 		fmt.Println("No cookies.")
