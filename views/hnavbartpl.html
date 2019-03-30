@@ -1,0 +1,24 @@
+{{define "hnavbar"}}
+    <nav class="navbar bg-dark navbar-dark text-white">
+        <a class="navbar-brand">HEYSHYA!</a>
+        <div class="pull-right">
+            {{if .IsOnline}}
+
+                <div class="dropdown">
+                    <nobr>Hello! {{.Username}}</nobr>
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/#">Logout</a>
+
+                    </div>
+                </div>
+
+            {{else}}
+                <button onclick="" id="loginbtn" class="btn btn-secondary">LOGIN</button>
+                <button onclick="" id="signupbtn" class="btn btn-secondary">SIGN UP</button>
+            {{end}}
+        </div>
+    </nav>
+{{end}}

@@ -2,7 +2,6 @@ package routerHandlers
 
 import (
 	"database/sql"
-	"fmt"
 	"html/template"
 	"net/http"
 	"time"
@@ -38,7 +37,6 @@ func SignupPage(res http.ResponseWriter, req *http.Request) {
 
 	var stduser string
 	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", username).Scan(&stduser)
-	fmt.Printf("Query error type: %s\n", err)
 
 	switch {
 	case err == sql.ErrNoRows:

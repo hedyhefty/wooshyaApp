@@ -5,13 +5,21 @@
     <meta charset="UTF-8">
     <title>WOOSHYA! FOR COMPANY USER</title>
     {{template "bootHeader" . }}
+    <script>
+        function coLogin() {
+            location.href = "/companyLogin"
+        }
 
+        function coSignUp() {
+            location.href = "/companySignup"
+        }
+    </script>
 </head>
 
 <body>
 <nav class="navbar bg-dark navbar-dark text-white">
 
-    <a class="navbar-brand" href="/">WOOSHYA! For Company User</a>
+    <a class="navbar-brand" href="/">HEYSHYA!</a>
 
     <div class="pull-right">
         <button onclick="coLogin()" id="coLoginbtn" class="btn btn-secondary">LOGIN</button>
@@ -19,17 +27,6 @@
 
     </div>
 </nav>
-<script>
-    function coLogin() {
-        location.href = "/companyLogin"
-    }
-
-    function coSignUp() {
-        location.href = "/companySignup"
-    }
-
-</script>
-<h1 style="text-align:center">Welcome to WOOSHA! for company!</h1>
 </body>
 
 </html>

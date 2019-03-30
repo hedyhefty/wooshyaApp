@@ -15,6 +15,7 @@ func HomePage(res http.ResponseWriter, req *http.Request) {
 
 	//fmt.Println("PPath: ", PPath)
 	//fmt.Println(PPath + "/views/index.html")
+	fmt.Println("call Homepage.")
 
 	indextplhandler, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
 	if err != nil {
