@@ -5,19 +5,28 @@
     <meta charset="UTF-8">
     <title>WOOSHYA! FOR COMPANY USER</title>
     {{template "bootHeader" . }}
+    <style>
+        .btn-secondary {
+            background-color: #000000;
+            background-color: rgba(0, 0, 0, 0);
+            border-color: rgba(0, 0, 0, 0);
+        }
+    </style>
     <script>
-        function coLogin() {
+        function cpyLogin() {
             location.href = "/companyLogin"
         }
 
-        function coSignUp() {
+        function cpySignUp() {
             location.href = "/companySignup"
         }
     </script>
 </head>
 
 <body>
-<nav class="navbar bg-dark navbar-dark text-white">
+
+{{template "hnavbar" . }}
+<!--nav class="navbar bg-dark navbar-dark text-white">
 
     <a class="navbar-brand" href="/">HEYSHYA!</a>
 
@@ -26,7 +35,7 @@
         <button onclick="coSignUp()" id="cpSignupbtn" class="btn btn-secondary">SIGN UP</button>
 
     </div>
-</nav>
+</nav-->
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 package routerHandlers
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"time"
@@ -44,7 +45,9 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
 	if err != nil {
 		// todo: add a info box including "Wrong password"
+		fmt.Println("wrong password.")
 		http.Redirect(res, req, "/companyLogin", 301)
+		return
 	}
 
 	updateDatehandler, err := DB.Prepare("UPDATE companyuser SET lastlogindate = ? WHERE username = ?")

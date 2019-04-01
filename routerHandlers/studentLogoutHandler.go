@@ -13,9 +13,14 @@ func StdLogout(res http.ResponseWriter, req *http.Request) {
 	} else {
 		fmt.Printf("%s=%s\r\n", cookie.Name, cookie.Value)
 		if SessionMap[cookie.Value] != nil {
-			SessionMap[cookie.Value].SetOff()
-
-			fmt.Println("Status of Session: ",SessionMap[cookie.Value].Connection)
+			session := SessionMap[cookie.Value]
+			if session.SessionType == Student {
+				session.SetOff()
+			} else {
+				fmt.Println("Session not matching")
+			}
+		} else {
+			fmt.Println("Session not exist.")
 		}
 	}
 

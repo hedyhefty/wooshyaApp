@@ -54,7 +54,7 @@ func (session Session) SetCookies() http.Cookie{
 
 func (session *Session) SetOff() {
 	session.Connection = false
-	fmt.Printf("Sesson %s was set off, and the state is: %t", (*session).Username, (*session).Connection)
+	fmt.Printf("Sesson %s was set off, and the state is: %t\n", (*session).Username, (*session).Connection)
 }
 
 func (session *Session) EndSession() {

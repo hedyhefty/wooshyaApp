@@ -47,6 +47,7 @@ func main() {
 	http.HandleFunc("/companyIndex", routerHandlers.CompanyHomePage)
 	http.HandleFunc("/companyLogin", routerHandlers.CompanyLogin)
 	http.HandleFunc("/companySignup", routerHandlers.CompanySignUp)
+	http.HandleFunc("/companyLogout",routerHandlers.CompanyLogout)
 	lerr := listenAndServerByMe(":8080", nil)
 	if lerr != nil {
 		panic(lerr.Error())

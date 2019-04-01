@@ -13,12 +13,36 @@ func CompanyHomePage(res http.ResponseWriter, req *http.Request) {
 
 	//add by st
 	fmt.Println("call Chp.")
-	cpyHptpl, err := template.ParseFiles(PPath+"/views/companyIndex.html", PPath+"/views/bootstrapHeader.html")
+	cpyHptpl, err := template.ParseFiles(PPath+"/views/companyIndex.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
 	if err != nil {
 		panic(err.Error())
 		return
 	}
-	err = cpyHptpl.Execute(res, nil)
+
+	var cpyHptplHandler Indextpl
+
+	cookies, err := req.Cookie("SessionID")
+	if err != nil {
+		fmt.Println("No cookies.")
+		cpyHptplHandler.IsOnline = false
+	} else {
+		fmt.Printf("cookies: %s = %s\n", cookies.Name, cookies.Value)
+		if SessionMap[cookies.Value] != nil {
+			session := SessionMap[cookies.Value]
+			if session.SessionType == Company {
+				cpyHptplHandler.Username = session.Username
+				cpyHptplHandler.IsOnline = session.Connection
+
+				fmt.Printf("User name is: %s\nSession type is: %s\nStatus of connection is: %t\n", session.Username, session.SessionType, session.Connection)
+
+			}
+		} else {
+			cpyHptplHandler.IsOnline = false
+			fmt.Println("Unknown cookies value.")
+		}
+	}
+
+	err = cpyHptpl.Execute(res, cpyHptplHandler)
 	if err != nil {
 		panic(err.Error())
 		return
