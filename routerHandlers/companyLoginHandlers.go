@@ -9,11 +9,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func CompanyLogin(res http.ResponseWriter, req *http.Request) {
+func CpyLogin(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
 
 		//by st
-		cpylogintpl, err := template.ParseFiles(PPath+"/views/companyLogin.html", PPath+"/views/bootstrapHeader.html")
+		cpylogintpl, err := template.ParseFiles(PPath+"/views/cpyLogin.html", PPath+"/views/bootstrapHeader.html")
 		if err != nil {
 			panic(err.Error())
 			return
@@ -26,7 +26,7 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 		}
 		//
 
-		//http.ServeFile(res, req, PPath+"/views/companyLogin.html")
+		//http.ServeFile(res, req, PPath+"/views/cpyLogin.html")
 		return
 	}
 
@@ -38,7 +38,7 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 	err := DB.QueryRow("select password from companyuser where username = ?", username).Scan(&databasePassword)
 	if err != nil {
 		// todo: add a info box including "Username not existed"
-		http.Redirect(res, req, "/companyLogin", 301)
+		http.Redirect(res, req, "/cpyLogin", 301)
 		return
 	}
 
@@ -46,21 +46,21 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		// todo: add a info box including "Wrong password"
 		fmt.Println("wrong password.")
-		http.Redirect(res, req, "/companyLogin", 301)
+		http.Redirect(res, req, "/cpyLogin", 301)
 		return
 	}
 
 	updateDatehandler, err := DB.Prepare("UPDATE companyuser SET lastlogindate = ? WHERE username = ?")
 	if err != nil {
 		// todo: add a info box to inform loginDate error
-		http.Redirect(res, req, "/companyLogin", 301)
+		http.Redirect(res, req, "/cpyLogin", 301)
 		return
 	}
 
 	logindate := time.Now().Local()
 	_, err = updateDatehandler.Exec(logindate, username)
 	if err != nil {
-		http.Redirect(res, req, "/companyLogin", 301)
+		http.Redirect(res, req, "/cpyLogin", 301)
 		return
 	}
 
@@ -71,5 +71,5 @@ func CompanyLogin(res http.ResponseWriter, req *http.Request) {
 	cookies := session.SetCookies()
 	http.SetCookie(res, &cookies)
 
-	http.Redirect(res, req, "/companyIndex", http.StatusSeeOther)
+	http.Redirect(res, req, "/cpyIndex", http.StatusSeeOther)
 }

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func StdLogout(res http.ResponseWriter, req *http.Request) {
+func StdLogOut(res http.ResponseWriter, req *http.Request) {
 	cookie, err := req.Cookie("SessionID")
 
 	if err != nil {

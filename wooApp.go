@@ -40,14 +40,14 @@ func main() {
 
 	//routers
 
-	http.HandleFunc("/", routerHandlers.HomePage)
-	http.HandleFunc("/login", routerHandlers.LoginPage)
-	http.HandleFunc("/signup", routerHandlers.SignupPage)
-	http.HandleFunc("/stdlogout",routerHandlers.StdLogout)
-	http.HandleFunc("/companyIndex", routerHandlers.CompanyHomePage)
-	http.HandleFunc("/companyLogin", routerHandlers.CompanyLogin)
-	http.HandleFunc("/companySignup", routerHandlers.CompanySignUp)
-	http.HandleFunc("/companyLogout",routerHandlers.CompanyLogout)
+	http.HandleFunc("/", routerHandlers.StdIndex)
+	http.HandleFunc("/stdLogin", routerHandlers.StdLogin)
+	http.HandleFunc("/stdSignUp", routerHandlers.StdSignUp)
+	http.HandleFunc("/stdLogOut",routerHandlers.StdLogOut)
+	http.HandleFunc("/cpyIndex", routerHandlers.CpyIndex)
+	http.HandleFunc("/cpyLogin", routerHandlers.CpyLogin)
+	http.HandleFunc("/cpySignUp", routerHandlers.CpySignUp)
+	http.HandleFunc("/cpyLogOut",routerHandlers.CpyLogOut)
 	http.HandleFunc("/cpyForgotPass", routerHandlers.CpyForgotPass)
 	lerr := listenAndServerByMe(":8080", nil)
 	if lerr != nil {

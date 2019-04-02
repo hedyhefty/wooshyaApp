@@ -23,7 +23,7 @@ package routerHandlers
 
 // func SignupPage(res http.ResponseWriter, req *http.Request) {
 // 	if (*req).Method != "POST" {
-// 		http.ServeFile(res, req, PPath+"/views/signup.html")
+// 		http.ServeFile(res, req, PPath+"/views/stdSignUp.html")
 // 		return
 // 	}
 
@@ -68,13 +68,13 @@ package routerHandlers
 
 // 	default:
 // 		// Username already exists
-// 		http.Redirect(res, req, "/signup", 301)
+// 		http.Redirect(res, req, "/stdSignUp", 301)
 // 	}
 // }
 
 // func LoginPage(res http.ResponseWriter, req *http.Request) {
 // 	if (*req).Method != "POST" {
-// 		http.ServeFile(res, req, PPath+"/views/login.html")
+// 		http.ServeFile(res, req, PPath+"/views/stdLogin.html")
 // 		return
 // 	}
 
@@ -87,25 +87,25 @@ package routerHandlers
 // 	err := DB.QueryRow("SELECT username,password FROM stdusers where username = ?", username).Scan(&databaseUsername, &databasePassword)
 
 // 	if err != nil {
-// 		http.Redirect(res, req, "/login", 301)
+// 		http.Redirect(res, req, "/stdLogin", 301)
 // 		return
 // 	}
 
 // 	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
 // 	if err != nil {
-// 		http.Redirect(res, req, "/login", 301)
+// 		http.Redirect(res, req, "/stdLogin", 301)
 // 	}
 
 // 	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
 // 	if err != nil {
-// 		http.Redirect(res, req, "/login", 301)
+// 		http.Redirect(res, req, "/stdLogin", 301)
 // 		return
 // 	}
 
 // 	logindate := time.Now().Local()
 // 	_, err = updateDatehandler.Exec(logindate, username)
 // 	if err != nil {
-// 		http.Redirect(res, req, "/login", 301)
+// 		http.Redirect(res, req, "/stdLogin", 301)
 // 	}
 
 // 	res.Write([]byte("hello " + databaseUsername))

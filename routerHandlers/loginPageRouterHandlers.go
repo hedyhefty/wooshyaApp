@@ -8,9 +8,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func LoginPage(res http.ResponseWriter, req *http.Request) {
+func StdLogin(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		logintpl, err := template.ParseFiles(PPath + "/views/login.html", PPath + "/views/bootstrapHeader.html")
+		logintpl, err := template.ParseFiles(PPath + "/views/stdLogin.html", PPath + "/views/bootstrapHeader.html")
 		if err != nil{
 			panic(err.Error())
 			return
@@ -20,7 +20,7 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 			panic(err.Error())
 			return
 		}
-		//http.ServeFile(res, req, PPath+"/views/login.html")
+		//http.ServeFile(res, req, PPath+"/views/stdLogin.html")
 		return
 	}
 
@@ -33,7 +33,7 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		// todo: add a info box including "Username not existed"
-		//http.Redirect(res, req, "/login", 301)
+		//http.Redirect(res, req, "/stdLogin", 301)
 		http.Error(res,"Cannot Login",500)
 		return
 	}
@@ -42,7 +42,7 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 		[]byte(password))
 	if err != nil {
 		// todo: add a info box including "Wrong password"
-		//http.Redirect(res, req, "/login", 301)
+		//http.Redirect(res, req, "/stdLogin", 301)
 		http.Error(res,"Cannot Login",500)
 		return
 	}
@@ -50,7 +50,7 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
 	if err != nil {
 		// todo: add a info box to inform loginDate error
-		//http.Redirect(res, req, "/login", 301)
+		//http.Redirect(res, req, "/stdLogin", 301)
 		http.Error(res,"Cannot Login",500)
 		return
 	}
@@ -58,7 +58,7 @@ func LoginPage(res http.ResponseWriter, req *http.Request) {
 	logindate := time.Now().Local()
 	_, err = updateDatehandler.Exec(logindate, username)
 	if err != nil {
-		//http.Redirect(res, req, "/login", 301)
+		//http.Redirect(res, req, "/stdLogin", 301)
 		http.Error(res,"Cannot Login",500)
 		return
 	}

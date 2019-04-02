@@ -9,9 +9,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func SignupPage(res http.ResponseWriter, req *http.Request) {
+func StdSignUp(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		signuptpl, err := template.ParseFiles(PPath+"/views/signup.html", PPath+"/views/bootstrapHeader.html")
+		signuptpl, err := template.ParseFiles(PPath+"/views/stdSignUp.html", PPath+"/views/bootstrapHeader.html")
 		if err != nil {
 			panic(err.Error())
 			return
@@ -21,7 +21,7 @@ func SignupPage(res http.ResponseWriter, req *http.Request) {
 			panic(err.Error())
 			return
 		}
-		//http.ServeFile(res, req, PPath+"/views/signup.html")
+		//http.ServeFile(res, req, PPath+"/views/stdSignUp.html")
 		return
 	}
 
@@ -65,6 +65,6 @@ func SignupPage(res http.ResponseWriter, req *http.Request) {
 
 	default:
 		// Username already exists
-		http.Redirect(res, req, "/signup", 301)
+		http.Redirect(res, req, "/stdSignUp", 301)
 	}
 }

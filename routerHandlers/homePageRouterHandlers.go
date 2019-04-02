@@ -11,7 +11,7 @@ type Indextpl struct {
 	IsOnline bool
 }
 
-func HomePage(res http.ResponseWriter, req *http.Request) {
+func StdIndex(res http.ResponseWriter, req *http.Request) {
 
 	//fmt.Println("PPath: ", PPath)
 	//fmt.Println(PPath + "/views/index.html")

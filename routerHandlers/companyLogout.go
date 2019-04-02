@@ -5,11 +5,11 @@ import (
 	"net/http"
 )
 
-func CompanyLogout(w http.ResponseWriter, r *http.Request) {
+func CpyLogOut(w http.ResponseWriter, r *http.Request) {
 	cookies, err := r.Cookie("SessionID")
 	if err != nil {
 		fmt.Println("No cookies.")
-		http.Redirect(w, r, "/companyIndex", http.StatusSeeOther)
+		http.Redirect(w, r, "/cpyIndex", http.StatusSeeOther)
 		return
 	}
 
@@ -25,5 +25,5 @@ func CompanyLogout(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Session not exist.")
 	}
 
-	http.Redirect(w, r, "/companyIndex", http.StatusSeeOther)
+	http.Redirect(w, r, "/cpyIndex", http.StatusSeeOther)
 }

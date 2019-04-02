@@ -54,7 +54,7 @@ func CpyForgotPass(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		fmt.Println("pass word update succeed.")
-		http.Redirect(w, r, "/companyIndex", http.StatusSeeOther)
+		http.Redirect(w, r, "/cpyIndex", http.StatusSeeOther)
 
 	} else {
 		fmt.Println("wrong mail address.")

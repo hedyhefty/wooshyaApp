@@ -6,14 +6,14 @@ import (
 	"net/http"
 )
 
-func CompanyHomePage(res http.ResponseWriter, req *http.Request) {
+func CpyIndex(res http.ResponseWriter, req *http.Request) {
 
 	// fmt.Println("PPath: ", PPath)
 	// fmt.Println(PPath + "/views/index.html")
 
 	//add by st
 	fmt.Println("call Chp.")
-	cpyHptpl, err := template.ParseFiles(PPath+"/views/companyIndex.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
+	cpyHptpl, err := template.ParseFiles(PPath+"/views/cpyIndex.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
 	if err != nil {
 		panic(err.Error())
 		return

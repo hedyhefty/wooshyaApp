@@ -9,9 +9,9 @@ import (
 	"time"
 )
 
-func CompanySignUp(w http.ResponseWriter, r *http.Request) {
+func CpySignUp(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		csuptpl, err := template.ParseFiles(PPath+"/views/companySignup.html", PPath+"/views/bootstrapHeader.html")
+		csuptpl, err := template.ParseFiles(PPath+"/views/cpySignUp.html", PPath+"/views/bootstrapHeader.html")
 		if err != nil {
 			panic(err.Error())
 			return
@@ -52,7 +52,7 @@ func CompanySignUp(w http.ResponseWriter, r *http.Request) {
 		}
 
 		fmt.Println("user created.")
-		http.Redirect(w, r, "/companyLogin", http.StatusSeeOther)
+		http.Redirect(w, r, "/cpyLogin", http.StatusSeeOther)
 		return
 
 	case err != nil:
@@ -60,7 +60,7 @@ func CompanySignUp(w http.ResponseWriter, r *http.Request) {
 		return
 
 	default:
-		http.Redirect(w, r, "/companySignup", http.StatusSeeOther)
+		http.Redirect(w, r, "/cpySignUp", http.StatusSeeOther)
 	}
 
 }
