@@ -44,6 +44,7 @@ func main() {
 	http.HandleFunc("/stdLogin", routerHandlers.StdLogin)
 	http.HandleFunc("/stdSignUp", routerHandlers.StdSignUp)
 	http.HandleFunc("/stdLogOut",routerHandlers.StdLogOut)
+	http.HandleFunc("/stdForgotPass",routerHandlers.StdForgotPass)
 	http.HandleFunc("/cpyIndex", routerHandlers.CpyIndex)
 	http.HandleFunc("/cpyLogin", routerHandlers.CpyLogin)
 	http.HandleFunc("/cpySignUp", routerHandlers.CpySignUp)
