@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HeyShya!</title>
+    {{template "bootHeader" . }}
+    <style>
+        .container {
+            margin-top: 12%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar bg-dark navbar-dark text-white">
+    <a class="navbar-brand" href="/companyIndex">HEYSHYA!</a>
+</nav>
+<div class="container text-center">
+    <div class="container col-md-5">
+        <h4>Set your new password</h4>
+        <form method="post" action="/cpyForgotPass">
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="username">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="mailaddress" placeholder="xxx@yy.com">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="newpassword" placeholder="new password">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-info" value="RESET PASSWORD">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

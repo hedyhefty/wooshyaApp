@@ -33,7 +33,7 @@ func CompanyHomePage(res http.ResponseWriter, req *http.Request) {
 				cpyHptplHandler.Username = session.Username
 				cpyHptplHandler.IsOnline = session.Connection
 
-				fmt.Printf("User name is: %s\nSession type is: %s\nStatus of connection is: %t\n", session.Username, session.SessionType, session.Connection)
+				fmt.Printf("User name is: %s\nSession type is: %d\nStatus of connection is: %t\n", session.Username, session.SessionType, session.Connection)
 
 			}
 		} else {

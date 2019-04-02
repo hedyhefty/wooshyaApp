@@ -48,6 +48,7 @@ func main() {
 	http.HandleFunc("/companyLogin", routerHandlers.CompanyLogin)
 	http.HandleFunc("/companySignup", routerHandlers.CompanySignUp)
 	http.HandleFunc("/companyLogout",routerHandlers.CompanyLogout)
+	http.HandleFunc("/cpyForgotPass", routerHandlers.CpyForgotPass)
 	lerr := listenAndServerByMe(":8080", nil)
 	if lerr != nil {
 		panic(lerr.Error())
