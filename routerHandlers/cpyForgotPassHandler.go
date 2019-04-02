@@ -31,14 +31,14 @@ func CpyForgotPass(w http.ResponseWriter, r *http.Request) {
 
 	var databaseMailadd string
 
-	err := DB.QueryRow("SELECT mailaddress FROM companyuser WHERE username = ?", username).Scan(&databaseMailadd)
+	err := DB.QueryRow("SELECT mailaddress FROM cpyusers WHERE username = ?", username).Scan(&databaseMailadd)
 	if err != nil {
 		fmt.Println("query mail error.")
 		return
 	}
 
 	if mailaddress == databaseMailadd {
-		passwordUPdateHandler, err := DB.Prepare("UPDATE companyuser SET password = ? WHERE username = ?")
+		passwordUPdateHandler, err := DB.Prepare("UPDATE cpyusers SET password = ? WHERE username = ?")
 		if err != nil {
 			fmt.Println("query failed.")
 			return

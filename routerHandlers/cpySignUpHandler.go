@@ -33,7 +33,7 @@ func CpySignUp(w http.ResponseWriter, r *http.Request) {
 	lastlogindate := time.Now().Local()
 
 	var cpyuser string
-	err := DB.QueryRow("SELECT username FROM companyuser WHERE username = ?", username).Scan(&cpyuser)
+	err := DB.QueryRow("SELECT username FROM cpyusers WHERE username = ?", username).Scan(&cpyuser)
 
 	switch {
 	case err == sql.ErrNoRows:
@@ -43,7 +43,7 @@ func CpySignUp(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_, err = DB.Exec("INSERT INTO companyuser(username,password,mailaddress,companyname,telephonenumber,lastlogindate) VALUES(?,?,?,?,?,?)", username, hashedPassword, mailaddress, companyname, telephonenumber, lastlogindate)
+		_, err = DB.Exec("INSERT INTO cpyusers(username,password,mailaddress,companyname,telephonenumber,lastlogindate) VALUES(?,?,?,?,?,?)", username, hashedPassword, mailaddress, companyname, telephonenumber, lastlogindate)
 
 		if err != nil {
 			fmt.Println(err)

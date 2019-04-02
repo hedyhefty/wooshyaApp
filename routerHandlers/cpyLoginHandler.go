@@ -35,7 +35,7 @@ func CpyLogin(res http.ResponseWriter, req *http.Request) {
 
 	var databasePassword string
 
-	err := DB.QueryRow("select password from companyuser where username = ?", username).Scan(&databasePassword)
+	err := DB.QueryRow("select password from cpyusers where username = ?", username).Scan(&databasePassword)
 	if err != nil {
 		// todo: add a info box including "Username not existed"
 		http.Redirect(res, req, "/cpyLogin", 301)
@@ -50,7 +50,7 @@ func CpyLogin(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	updateDatehandler, err := DB.Prepare("UPDATE companyuser SET lastlogindate = ? WHERE username = ?")
+	updateDatehandler, err := DB.Prepare("UPDATE cpyusers SET lastlogindate = ? WHERE username = ?")
 	if err != nil {
 		// todo: add a info box to inform loginDate error
 		http.Redirect(res, req, "/cpyLogin", 301)
