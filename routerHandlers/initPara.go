@@ -23,10 +23,10 @@ const (
 )
 
 type Session struct {
-	Username   string
-	Connection bool
+	Username    string
+	Connection  bool
 	SessionType SessionTypeMask
-	SessionID  string
+	SessionID   string
 }
 
 func (session *Session) StartSession() {
@@ -44,7 +44,7 @@ func (session *Session) MakeSessionID() {
 	}
 }
 
-func (session Session) SetCookies() http.Cookie{
+func (session Session) SetCookies() http.Cookie {
 	expiration := time.Now()
 	expiration = expiration.AddDate(0, 0, 7)
 	cookie := http.Cookie{Name: "SessionID", Value: session.SessionID, Expires: expiration}
@@ -68,6 +68,31 @@ func (session *Session) EndSession() {
 
 	t = time.AfterFunc(12*time.Minute, f)
 	time.Sleep(15 * time.Minute)
+}
+
+func CheckLogin(sessionType SessionTypeMask, req *http.Request) (bool, *Session) {
+	cookies, err := req.Cookie("SessionID")
+	if err != nil {
+		fmt.Println("load cookies error: ", err)
+		return false, nil
+	}
+
+	if SessionMap[cookies.Value] == nil {
+		fmt.Println("no relative cookies.")
+		return false, nil
+	}
+
+	if SessionMap[cookies.Value].SessionType != sessionType {
+		fmt.Println("session type missmatch.")
+		return false, nil
+	}
+
+	if !SessionMap[cookies.Value].Connection {
+		fmt.Println("session disconnected.")
+		return false, nil
+	}
+
+	return true, SessionMap[cookies.Value]
 }
 
 func init() {

@@ -8,38 +8,76 @@
 
     <style>
         .container {
+            margin-top: 5%;
+        }
+
+        .slogan {
+            margin-top: 16%;
+        }
+
+        .loginContainer {
             margin-top: 12%;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("https://media.boingboing.net/wp-content/uploads/2018/05/cool-background1.png");
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .btn-link {
+            color: white;
         }
 
     </style>
 </head>
 
-<body>
+<body class="bg">
 <nav class="navbar bg-dark navbar-dark text-white">
 
-    <a class="navbar-brand" href="/cpyIndex">HEYSHYA!</a>
+    <a class="navbar-brand" href="/cpyIndex">Heyshya!</a>
 
 </nav>
 
-<div class="container text-center">
-    <div class="container col-md-5">
-        <h3>Company User Login</h3>
-        <form method="POST" action="/cpyLogin">
-            <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-info" value="LOGIN!">
-            </div>
-            <div class="form-group">
-                <a href="cpyForgotPass" class="btn btn-link">Forget Password?</a>
-            </div>
-        </form>
-    </div>
+<div class="container text-center text-white">
+    <div class="row">
+        <div class="container col-sm slogan">
+            <h1>Join us, and be more <b>International</b>.</h1>
+        </div>
+        <div class="container col-sm loginContainer">
+            <h3>Heyshya Login</h3>
+            <div class="container">
+                <form method="POST" action="/cpyLogin">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" name="username" placeholder="Username">
+                        </div>
 
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-xs-4">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-outline-light" value="Sign In">
+                        <a href="cpySignUp" class="btn btn-outline-light">Sign Up</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="cpyForgotPass" class="btn btn-link">Forget Password?</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 </body>
