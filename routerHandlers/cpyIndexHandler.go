@@ -1,7 +1,6 @@
 package routerHandlers
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -9,14 +8,7 @@ import (
 func CpyIndex(w http.ResponseWriter, r *http.Request) {
 
 	//add by st
-	fmt.Println("call Chp.")
-	cpyHptpl, err := template.ParseFiles(PPath+"/views/cpyIndex.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
-	if err != nil {
-		panic(err.Error())
-		return
-	}
-
-	var cpyHptplHandler Indextpl
+	//fmt.Println("call Chp.")
 
 	IsOnline, session := CheckLogin(Company, r)
 	if !IsOnline {
@@ -24,6 +16,13 @@ func CpyIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cpyHptpl, err := template.ParseFiles(PPath+"/views/cpyIndex.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
+	if err != nil {
+		panic(err.Error())
+		return
+	}
+
+	var cpyHptplHandler Navtpl
 	cpyHptplHandler.Username = session.Username
 
 	err = cpyHptpl.Execute(w, cpyHptplHandler)

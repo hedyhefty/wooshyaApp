@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type Indextpl struct {
+type Navtpl struct {
 	Username string
 	IsOnline bool
 }
@@ -29,7 +29,7 @@ func StdIndex(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var indextpl Indextpl
+	var indextpl Navtpl
 
 	cookie, err := req.Cookie("SessionID")
 

@@ -33,7 +33,22 @@ CREATE TABLE cpyusers(
     password VARCHAR(120),
     mailaddress VARCHAR(50),
     companyname VARCHAR(50),
+    category VARCHAR(50),
+    discripttion VARCHAR(500),
     telephonenumber VARCHAR(50),
     lastlogindate DATE
+);
+
+CREATE TABLE jobs(
+	jid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cpyid INT,
+    jtitle VARCHAR(50),
+    jdescribe VARCHAR(500),
+    jsalary VARCHAR(500),
+    jlocation VARCHAR(50),
+    jotherdetails VARCHAR(500),
+    releasedate DATETIME,
+    startdate DATETIME,
+    deadline DATETIME
 );
 ```
