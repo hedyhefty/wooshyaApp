@@ -15,7 +15,7 @@ type Profiletpl struct {
 	IsOnline       bool
 }
 
-func CpyProfileHandler(w http.ResponseWriter, r *http.Request) {
+func CpyProfile(w http.ResponseWriter, r *http.Request) {
 	IsOnline, session := CheckLogin(Company, r)
 	if !IsOnline {
 		http.Redirect(w, r, "/cpyLogin", http.StatusSeeOther)

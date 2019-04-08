@@ -28,31 +28,32 @@ func init() {
 	routerHandlers.DB = DB
 }
 
-func listenAndServerByMe(addr string, handler http.Handler) error {
-	my_server := &http.Server{Addr: addr, Handler: handler}
-	fmt.Printf("Server started, listen on port %s\n", addr)
-	return my_server.ListenAndServe()
-}
-
 func main() {
 	//close DB
 	defer DB.Close()
 
-	//routers
+	mux := http.NewServeMux()
 
-	http.HandleFunc("/", routerHandlers.StdIndex)
-	http.HandleFunc("/stdLogin", routerHandlers.StdLogin)
-	http.HandleFunc("/stdSignUp", routerHandlers.StdSignUp)
-	http.HandleFunc("/stdLogOut",routerHandlers.StdLogOut)
-	http.HandleFunc("/stdForgotPass",routerHandlers.StdForgotPass)
-	http.HandleFunc("/cpyIndex", routerHandlers.CpyIndex)
-	http.HandleFunc("/cpyIndex/profile", routerHandlers.CpyProfileHandler)
-	http.HandleFunc("/cpyLogin", routerHandlers.CpyLogin)
-	http.HandleFunc("/cpySignUp", routerHandlers.CpySignUp)
-	http.HandleFunc("/cpyLogOut",routerHandlers.CpyLogOut)
-	http.HandleFunc("/cpyForgotPass", routerHandlers.CpyForgotPass)
-	lerr := listenAndServerByMe(":8080", nil)
-	if lerr != nil {
-		panic(lerr.Error())
+	//routers for student users
+	mux.HandleFunc("/", routerHandlers.StdIndex)
+	mux.HandleFunc("/stdLogin", routerHandlers.StdLogin)
+	mux.HandleFunc("/stdLogOut", routerHandlers.StdLogOut)
+	mux.HandleFunc("/stdSignUp", routerHandlers.StdSignUp)
+	mux.HandleFunc("/stdForgotPass", routerHandlers.StdForgotPass)
+
+	//routers for company users
+	mux.HandleFunc("/cpyIndex",routerHandlers.CpyIndex)
+	mux.HandleFunc("/cpyIndex/profile",routerHandlers.CpyProfile)
+	mux.HandleFunc("/cpyLogin",routerHandlers.CpyLogin)
+	mux.HandleFunc("/cpyLogOut",routerHandlers.CpyLogOut)
+	mux.HandleFunc("/cpySignUp",routerHandlers.CpySignUp)
+	mux.HandleFunc("/cpyForgotPass",routerHandlers.CpyForgotPass)
+
+	server := &http.Server{Addr:":8080",Handler:mux}
+	fmt.Printf("Server started, listen on port %s\n", server.Addr)
+	err := server.ListenAndServe()
+
+	if err != nil {
+		panic(err.Error())
 	}
 }
