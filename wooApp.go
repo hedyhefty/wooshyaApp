@@ -28,9 +28,19 @@ func init() {
 	routerHandlers.DB = DB
 }
 
+//handle err for defer db.close
+func CloseDB(db *sql.DB) {
+	err := db.Close()
+	if err != nil {
+		panic(err.Error())
+	} else {
+		fmt.Println("DB has closed.")
+	}
+}
+
 func main() {
 	//close DB
-	defer DB.Close()
+	defer CloseDB(DB)
 
 	mux := http.NewServeMux()
 
@@ -42,14 +52,14 @@ func main() {
 	mux.HandleFunc("/stdForgotPass", routerHandlers.StdForgotPass)
 
 	//routers for company users
-	mux.HandleFunc("/cpyIndex",routerHandlers.CpyIndex)
-	mux.HandleFunc("/cpyIndex/profile",routerHandlers.CpyProfile)
-	mux.HandleFunc("/cpyLogin",routerHandlers.CpyLogin)
-	mux.HandleFunc("/cpyLogOut",routerHandlers.CpyLogOut)
-	mux.HandleFunc("/cpySignUp",routerHandlers.CpySignUp)
-	mux.HandleFunc("/cpyForgotPass",routerHandlers.CpyForgotPass)
+	mux.HandleFunc("/cpyIndex", routerHandlers.CpyIndex)
+	mux.HandleFunc("/cpyIndex/profile", routerHandlers.CpyProfile)
+	mux.HandleFunc("/cpyLogin", routerHandlers.CpyLogin)
+	mux.HandleFunc("/cpyLogOut", routerHandlers.CpyLogOut)
+	mux.HandleFunc("/cpySignUp", routerHandlers.CpySignUp)
+	mux.HandleFunc("/cpyForgotPass", routerHandlers.CpyForgotPass)
 
-	server := &http.Server{Addr:":8080",Handler:mux}
+	server := &http.Server{Addr: ":8080", Handler: mux}
 	fmt.Printf("Server started, listen on port %s\n", server.Addr)
 	err := server.ListenAndServe()
 
