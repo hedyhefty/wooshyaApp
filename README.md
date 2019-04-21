@@ -34,7 +34,7 @@ CREATE TABLE cpyusers(
     mailaddress VARCHAR(50),
     companyname VARCHAR(50),
     category VARCHAR(50),
-    discripttion VARCHAR(500),
+    description VARCHAR(500),
     telephonenumber VARCHAR(50),
     lastlogindate DATE
 );
