@@ -16,17 +16,33 @@ type Profiletpl struct {
 }
 
 func CpyProfile(w http.ResponseWriter, r *http.Request) {
+	requestHeader := FormatRequest(r)
+	fmt.Print("\n")
+	fmt.Println(requestHeader)
 	IsOnline, session := CheckLogin(Company, r)
 	if !IsOnline {
 		http.Redirect(w, r, "/cpyLogin", http.StatusSeeOther)
 		return
 	}
 
+	if r.Method == "POST" {
+		category := r.FormValue("category")
+		description := r.FormValue("description")
+		fmt.Println("description is: ", description)
+
+		updateProfilehandler, err := DB.Prepare("UPDATE cpyusers SET category = ?, description = ? WHERE username = ?")
+		if err != nil {
+			panic(err.Error())
+		}
+		_, err = updateProfilehandler.Exec(category, description, session.Username);
+		http.Redirect(w, r, "/cpyIndex/profile", http.StatusSeeOther)
+	}
+
 	var databaseCpyName sql.NullString
 	var databaseCpyCategory sql.NullString
 	var databaseDescription sql.NullString
 
-	row := DB.QueryRow("select companyname,category,discription from cpyusers where username = ?", session.Username)
+	row := DB.QueryRow("select companyname,category,description from cpyusers where username = ?", session.Username)
 	err := row.Scan(&databaseCpyName, &databaseCpyCategory, &databaseDescription)
 	if err != nil {
 		panic(err.Error())
