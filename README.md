@@ -24,7 +24,7 @@ CREATE TABLE stdusers(
     department VARCHAR(50),
     major VARCHAR(50),
     graduatedate(50),
-    lastlogindate DATE
+    lastlogindate DATETIME
 );
 
 CREATE TABLE cpyusers(
@@ -36,7 +36,7 @@ CREATE TABLE cpyusers(
     category VARCHAR(50),
     description VARCHAR(500),
     telephonenumber VARCHAR(50),
-    lastlogindate DATE
+    lastlogindate DATETIME
 );
 
 CREATE TABLE jobs(
