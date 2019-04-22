@@ -46,7 +46,6 @@ func CpyProfile(w http.ResponseWriter, r *http.Request) {
 	err := row.Scan(&databaseCpyName, &databaseCpyCategory, &databaseDescription)
 	if err != nil {
 		panic(err.Error())
-		fmt.Println(err)
 		return
 	}
 
@@ -55,14 +54,12 @@ func CpyProfile(w http.ResponseWriter, r *http.Request) {
 	profiletpl, err := template.ParseFiles(PPath+"/views/cpyProfile.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
 	if err != nil {
 		panic(err.Error())
-		fmt.Println(err)
 		return
 	}
 
 	err = profiletpl.Execute(w, tplhandler)
 	if err != nil {
 		panic(err.Error())
-		fmt.Println(err)
 		return
 	}
 }

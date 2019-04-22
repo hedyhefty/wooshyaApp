@@ -132,5 +132,12 @@ func FormatRequest(r *http.Request) string {
 	}
 
 	//Return the request as a string
-	return strings.Join(request, "\n")
+	return strings.Join(request, "\n") + "\n"
+}
+
+func PraseDateTime(t string) string {
+	tmp := []byte(t)
+	tmp[10] = ' '
+	res := string(tmp)
+	return res + ":00"
 }
