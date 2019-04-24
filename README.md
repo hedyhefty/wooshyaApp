@@ -43,7 +43,7 @@ CREATE TABLE cpyusers(
 ```
 ```sql
 CREATE TABLE jobs(
-	jid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    jid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     cpyid INT,
     jtitle VARCHAR(50),
     jdescribe VARCHAR(500),
@@ -57,7 +57,7 @@ CREATE TABLE jobs(
 ```
 ```sql
 CREATE TABLE news(
-	news_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    news_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     cpy_id INT,
     news_title VARCHAR(50),
     news_content VARCHAR(500),
