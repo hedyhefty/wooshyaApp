@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"fmt"
+	"github.com/pkg/errors"
 	"io"
 	"net/http"
 	"os"
@@ -140,4 +141,27 @@ func PraseDateTime(t string) string {
 	tmp[10] = ' '
 	res := string(tmp)
 	return res + ":00"
+}
+
+func GetID(session *Session) (int, error) {
+	var id int
+	if session.SessionType == Student {
+		err := DB.QueryRow("SELECT id FROM stdusers WHERE username = ?", session.Username).Scan(&id)
+		if err != nil {
+			panic(err.Error())
+			return -1, errors.New("Unknow error form GetID.")
+		}
+		return id, nil
+	}
+
+	if session.SessionType == Company {
+		err := DB.QueryRow("SELECT id FROM cpyusers WHERE username = ?", session.Username).Scan(&id)
+		if err != nil {
+			panic(err.Error())
+			return -1, errors.New("Unknow error form GetID.")
+		}
+		return id, nil
+	}
+
+	return -1, errors.New("Unknow error form GetID.")
 }

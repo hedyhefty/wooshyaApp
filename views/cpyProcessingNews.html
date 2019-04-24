@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {{template "bootHeader" . }}
+    <style>
+        .container {
+            margin-top: 5%;
+        }
+
+    </style>
+</head>
+<body>
+{{template "hnavbar" . }}
+
+<div class="container">
+    <div class="container">
+        <h3>News you have posted</h3>
+        {{range .NewsTitle}}
+            <div class="container">
+                <p>{{.}}</p>
+            </div>
+        {{end}}
+    </div>
+</div>
+</body>
+</html>
