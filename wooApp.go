@@ -54,7 +54,8 @@ func main() {
 	//routers for company users
 	mux.HandleFunc("/cpyIndex", routerHandlers.CpyIndex)
 	mux.HandleFunc("/cpyIndex/profile", routerHandlers.CpyProfile)
-	mux.HandleFunc("/CpyIndex/ReleaseJob",routerHandlers.CpyReleaseJob)
+	mux.HandleFunc("/cpyIndex/releaseJob", routerHandlers.CpyReleaseJob)
+	mux.HandleFunc("/cpyIndex/releaseNews", routerHandlers.CpyReleaseNews)
 
 	mux.HandleFunc("/cpyLogin", routerHandlers.CpyLogin)
 	mux.HandleFunc("/cpyLogOut", routerHandlers.CpyLogOut)

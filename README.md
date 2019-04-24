@@ -1,7 +1,7 @@
 # wooshyaApp
-* Website for international student job seeking
+* Website for international student career in japan.
 
-* Designed by ST Wang and ZZ Zhang
+* Designed by ST Wang and ZZ Zhang.
 
 ### init setting:
 * You have to install mysql and go get the package below:
@@ -26,7 +26,9 @@ CREATE TABLE stdusers(
     graduatedate(50),
     lastlogindate DATETIME
 );
+```
 
+```sql
 CREATE TABLE cpyusers(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
@@ -38,7 +40,8 @@ CREATE TABLE cpyusers(
     telephonenumber VARCHAR(50),
     lastlogindate DATETIME
 );
-
+```
+```sql
 CREATE TABLE jobs(
 	jid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     cpyid INT,
@@ -50,5 +53,14 @@ CREATE TABLE jobs(
     releasedate DATETIME,
     startdate DATETIME,
     deadline DATETIME
+);
+```
+```sql
+CREATE TABLE news(
+	news_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cpy_id INT,
+    news_title VARCHAR(50),
+    news_content VARCHAR(500),
+    release_date DATETIME
 );
 ```
