@@ -46,6 +46,8 @@ func main() {
 
 	//routers for student users
 	mux.HandleFunc("/", routerHandlers.StdIndex)
+	mux.HandleFunc("/stdNewsPage", routerHandlers.StdNewsPage)
+	mux.HandleFunc("/viewNews", routerHandlers.StdViewNews)
 	mux.HandleFunc("/stdLogin", routerHandlers.StdLogin)
 	mux.HandleFunc("/stdLogOut", routerHandlers.StdLogOut)
 	mux.HandleFunc("/stdSignUp", routerHandlers.StdSignUp)

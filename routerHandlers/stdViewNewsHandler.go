@@ -7,13 +7,7 @@ import (
 	"strconv"
 )
 
-type displayNewsHdr struct {
-	Username string
-	IsOnline bool
-	News     NewsModel
-}
-
-func CpyViewNews(w http.ResponseWriter, r *http.Request) {
+func StdViewNews(w http.ResponseWriter, r *http.Request) {
 	//prase header
 	requestHeader := FormatRequest(r)
 	fmt.Printf("\n")
@@ -21,12 +15,8 @@ func CpyViewNews(w http.ResponseWriter, r *http.Request) {
 	//end
 
 	//check user
-	IsOnline, session := CheckLogin(Company, r)
-	if !IsOnline {
-		http.Redirect(w, r, "/cpyLogin", http.StatusSeeOther)
-		return
-	}
-	//end
+	IsOnline, session := CheckLogin(Student, r)
+	//end check
 
 	paras := r.URL.Query()
 	nid_str := paras.Get("nid")
@@ -36,7 +26,6 @@ func CpyViewNews(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 	news := NewsModel{NewsID: nid}
 
 	err = DB.QueryRow("select cpy_id,news_title,news_content,release_date from news where news_id = ?", nid).Scan(&news.CpyID, &news.NewsTitle, &news.NewsContent, &news.ReleaseDate)
@@ -51,18 +40,23 @@ func CpyViewNews(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	newsDisplayHdr := displayNewsHdr{Username: session.Username, News: news}
+	var displayhdr displayNewsHdr
 
-	htmlTemplate, err := template.ParseFiles(PPath+"/views/cpyViewNews.html", PPath+"/views/bootstrapHeader.html", PPath+"/views/hnavbartpl.html")
+	if IsOnline {
+		displayhdr = displayNewsHdr{Username: session.Username, IsOnline: IsOnline, News: news}
+	} else {
+		displayhdr = displayNewsHdr{ IsOnline: IsOnline, News: news}
+	}
+
+	htmltpl, err := template.ParseFiles(PPath+"/views/stdViewNews.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Template Prase Error", http.StatusInternalServerError)
 		return
 	}
 
-	err = htmlTemplate.Execute(w, newsDisplayHdr)
+	err = htmltpl.Execute(w, displayhdr)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		http.Error(w, "Template Excute Error", http.StatusInternalServerError)
 	}
 
 }

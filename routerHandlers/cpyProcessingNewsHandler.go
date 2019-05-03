@@ -9,6 +9,7 @@ import (
 
 type displayHdr struct {
 	Username string
+	IsOnline bool
 	News     []NewsModel
 }
 

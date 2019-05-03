@@ -5,10 +5,12 @@
     <title></title>
     {{template "bootHeader" . }}
     <style>
-        .btn-secondary {
-            background-color: #000000;
-            background-color: rgba(0, 0, 0, 0);
-            border-color: rgba(0, 0, 0, 0);
+
+        .searcharea{
+            margin-top: 8%;
+        }
+        .searchbar{
+            margin-top: 2%;
         }
     </style>
     <script>
@@ -28,5 +30,34 @@
 </head>
 <body>
 {{template "navbar" . }}
+
+<div class="container searcharea text-center">
+    <div class="container">
+        <h1>WooFIND</h1>
+    </div>
+    <div class="container col-8 searchbar">
+        <form method="POST">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Search </label>
+                </div>
+                <select class="custom-select col-3" id="inputGroupSelect01" name="type_select">
+                    <option value="1">BY Company</option>
+                    <option value="2">BY JTitle</option>
+                    <option value="3">BY Category</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Keywords" name="keywords">
+                <div class="input-group-append">
+                    <input type="submit" value="Search!" class="btn btn-outline-secondary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container hotnews">
+
+</div>
+
 </body>
 </html>

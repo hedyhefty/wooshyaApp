@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {{template "bootHeader" . }}
+    <style>
+        .container {
+            margin-top: 5%;
+        }
+
+    </style>
+</head>
+<body>
+{{template "navbar" . }}
+
+<div class="container">
+    <div class="container">
+        <h3>{{.News.NewsTitle}}</h3>
+        <p>release date: {{.News.ReleaseDate}}</p>
+        <p>from: {{.News.CpyName}}</p>
+        <div class="container">
+            {{.News.NewsContent}}
+        </div>
+    </div>
+</div>
+</body>
+</html>

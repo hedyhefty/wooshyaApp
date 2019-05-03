@@ -11,17 +11,19 @@ type Navtpl struct {
 	IsOnline bool
 }
 
-func StdIndex(res http.ResponseWriter, req *http.Request) {
+func StdIndex(w http.ResponseWriter, r *http.Request) {
 
 	//fmt.Println("PPath: ", PPath)
 	//fmt.Println(PPath + "/views/index.html")
 
 	//deal with the request to favcion, which missing until now.
-	if req.URL.Path == "/favicon.ico" {
+	if r.URL.Path == "/favicon.ico" {
 		return
 	}
 
-	fmt.Println("call Homepage.")
+	requestHeader := FormatRequest(r)
+	fmt.Printf("\n")
+	fmt.Println(requestHeader)
 
 	indextplhandler, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
 	if err != nil {
@@ -31,7 +33,7 @@ func StdIndex(res http.ResponseWriter, req *http.Request) {
 
 	var indextpl Navtpl
 
-	cookie, err := req.Cookie("SessionID")
+	cookie, err := r.Cookie("SessionID")
 
 	if err != nil {
 		fmt.Println("No cookies.")
@@ -67,7 +69,7 @@ func StdIndex(res http.ResponseWriter, req *http.Request) {
 		}
 	}
 
-	err = indextplhandler.Execute(res, indextpl)
+	err = indextplhandler.Execute(w, indextpl)
 	if err != nil {
 		panic(err.Error())
 		return
