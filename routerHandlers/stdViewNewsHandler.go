@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"wooshyaApp/Models"
 )
 
 func StdViewNews(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +27,7 @@ func StdViewNews(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	news := NewsModel{NewsID: nid}
+	news := Models.NewsModel{NewsID: nid}
 
 	err = DB.QueryRow("select cpy_id,news_title,news_content,release_date from news where news_id = ?", nid).Scan(&news.CpyID, &news.NewsTitle, &news.NewsContent, &news.ReleaseDate)
 	if err != nil {

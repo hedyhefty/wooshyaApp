@@ -25,53 +25,44 @@ func StdIndex(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("\n")
 	fmt.Println(requestHeader)
 
-	indextplhandler, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
-	if err != nil {
-		fmt.Println("failed to load template.")
-		return
-	}
+	IsOnline, session := CheckLogin(Student, r)
 
-	var indextpl Navtpl
-
-	cookie, err := r.Cookie("SessionID")
-
-	if err != nil {
-		fmt.Println("No cookies.")
-		indextpl.IsOnline = false
-	} else {
-		fmt.Printf("%s=%s\r\n", cookie.Name, cookie.Value)
-		if SessionMap[cookie.Value] != nil {
-			session := SessionMap[cookie.Value]
-			if session.SessionType == Student {
-				var status string
-				//Set username
-				indextpl.Username = session.Username
-
-				fmt.Println("username: ", indextpl.Username)
-				fmt.Println("SessionType: ", session.SessionType)
-				if session.Connection {
-					status = "Online"
-					indextpl.IsOnline = true
-				} else {
-					status = "Offline"
-					indextpl.IsOnline = false
-				}
-				fmt.Printf("Session status of %s is: %s\n", session.Username, status)
-			}
-		} else {
-			indextpl.IsOnline = false
-			fmt.Println("Unknown Cookies value.")
-			//indextpl.Username = ""
-			//session := Session{cookie.Value, false}
-			//SessionMap[cookie.Value] = &session
-			//fmt.Printf("Create session for %s\n", cookie.Value)
-
+	if r.Method == "GET" {
+		navtpl := Navtpl{IsOnline: IsOnline}
+		if IsOnline {
+			navtpl.Username = session.Username
 		}
-	}
 
-	err = indextplhandler.Execute(w, indextpl)
-	if err != nil {
-		panic(err.Error())
+		htmlHdr, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
+		if err != nil {
+			http.Error(w, "Prase html failed.", http.StatusInternalServerError)
+			return
+		}
+
+		err = htmlHdr.Execute(w, navtpl)
+		if err != nil {
+			http.Error(w, "html template exection failed.", http.StatusInternalServerError)
+		}
+
 		return
 	}
+
+	if r.Method == "POST" {
+		keywords := r.FormValue("keywords")
+		searchtype := r.FormValue("search_type")
+
+		res_url := "/stdSearchResultPage?keywords=" + keywords + "&searchtype=" + searchtype
+
+		http.Redirect(w, r, res_url, 303)
+		return
+	}
+
+}
+
+func ErrorHandler(w http.ResponseWriter, err error, errorString string, errCode int) bool {
+	if err != nil {
+		http.Error(w, errorString, errCode)
+		return true
+	}
+	return false
 }

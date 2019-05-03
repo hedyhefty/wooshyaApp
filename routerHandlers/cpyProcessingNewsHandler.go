@@ -5,23 +5,16 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"wooshyaApp/Models"
 )
 
 type displayHdr struct {
 	Username string
 	IsOnline bool
-	News     []NewsModel
+	News     []Models.NewsModel
 }
 
-type NewsModel struct {
-	NewsID      int
-	CpyID       int
-	CpyName     string
-	NewsURL     string
-	NewsTitle   string
-	NewsContent string
-	ReleaseDate string
-}
+
 
 func CpyProcessingNews(w http.ResponseWriter, r *http.Request) {
 	requestHeader := FormatRequest(r)
@@ -61,7 +54,7 @@ func CpyProcessingNews(w http.ResponseWriter, r *http.Request) {
 
 		news_url := "/cpyIndex/viewNews?nid=" + strconv.Itoa(news_idHdr)
 
-		newsHdr := NewsModel{NewsURL: news_url, NewsTitle: news_titleHdr}
+		newsHdr := Models.NewsModel{NewsURL: news_url, NewsTitle: news_titleHdr}
 
 		displaytplhdr.News = append(displaytplhdr.News, newsHdr)
 	}

@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"wooshyaApp/Models"
 )
 
 func StdNewsPage(w http.ResponseWriter, r *http.Request) {
@@ -48,7 +49,7 @@ func StdNewsPage(w http.ResponseWriter, r *http.Request) {
 
 		news_url := "/viewNews?nid=" + strconv.Itoa(news_idHdr)
 
-		newsHdr := NewsModel{NewsURL: news_url, NewsTitle: news_titleHdr}
+		newsHdr := Models.NewsModel{NewsURL: news_url, NewsTitle: news_titleHdr}
 
 		displayhdr.News = append(displayhdr.News, newsHdr)
 	}

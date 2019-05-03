@@ -5,12 +5,13 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"wooshyaApp/Models"
 )
 
 type displayNewsHdr struct {
 	Username string
 	IsOnline bool
-	News     NewsModel
+	News     Models.NewsModel
 }
 
 func CpyViewNews(w http.ResponseWriter, r *http.Request) {
@@ -37,7 +38,7 @@ func CpyViewNews(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	news := NewsModel{NewsID: nid}
+	news := Models.NewsModel{NewsID: nid}
 
 	err = DB.QueryRow("select cpy_id,news_title,news_content,release_date from news where news_id = ?", nid).Scan(&news.CpyID, &news.NewsTitle, &news.NewsContent, &news.ReleaseDate)
 	if err != nil {
