@@ -5,8 +5,12 @@
     <title>Title</title>
     {{template "bootHeader" . }}
     <style>
-        .container {
+        .title {
             margin-top: 5%;
+        }
+
+        .applybtn {
+            margin-bottom: 5%;
         }
 
     </style>
@@ -15,21 +19,33 @@
 {{template "navbar" . }}
 
 <div class="container">
-    <div class="container">
+    <div class="container title">
         <h3>{{.Job.Title}}</h3>
         <p>release date: {{.Job.ReleaseDate}}</p>
         <p>from: {{.Job.CpyName}}</p>
         <div class="container">
+            <p>Job description:</p>
             {{.Job.Describe}}
         </div>
         <p>work place: {{.Job.Location}}</p>
         <p>salary: {{.Job.Salary}}</p>
         <div class="container">
+            <p>Other details:</p>
             {{.Job.OtherDetails}}
         </div>
         <p>applcation start date: {{.Job.StartDate}}</p>
         <p>applcation deadline: {{.Job.Deadline}}</p>
     </div>
+    <div class="container applybtn">
+        <form method="post">
+            {{if .IsOnline}}
+                <input type="submit" class="btn btn-primary" value="Apply!">
+            {{else}}
+                <input type="submit" class="btn btn-secondary" disabled="disabled" value="Apply!">
+            {{end}}
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

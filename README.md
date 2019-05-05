@@ -64,3 +64,11 @@ CREATE TABLE news(
     release_date DATETIME
 );
 ```
+```sql
+CREATE TABLE application(
+    jid INT,
+    stdid INT,
+    applydate DATETIME,
+    primary key(jid,stdid)
+);
+```
