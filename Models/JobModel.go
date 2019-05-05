@@ -12,5 +12,7 @@ type JobModel struct {
 	StartDate    string
 	Deadline     string
 
-	JobURL       string
+	//not straight from database.
+	JobURL  string
+	CpyName string
 }

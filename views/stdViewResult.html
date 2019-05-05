@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {{template "bootHeader" . }}
+    <style>
+        .container {
+            margin-top: 5%;
+        }
+
+    </style>
+</head>
+<body>
+{{template "navbar" . }}
+
+<div class="container">
+    <div class="container">
+        <h3>{{.Job.Title}}</h3>
+        <p>release date: {{.Job.ReleaseDate}}</p>
+        <p>from: {{.Job.CpyName}}</p>
+        <div class="container">
+            {{.Job.Describe}}
+        </div>
+        <p>work place: {{.Job.Location}}</p>
+        <p>salary: {{.Job.Salary}}</p>
+        <div class="container">
+            {{.Job.OtherDetails}}
+        </div>
+        <p>applcation start date: {{.Job.StartDate}}</p>
+        <p>applcation deadline: {{.Job.Deadline}}</p>
+    </div>
+</div>
+</body>
+</html>
