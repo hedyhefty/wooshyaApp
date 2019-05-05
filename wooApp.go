@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
-	"wooshyaApp/routerHandlers"
+	"wooshyaApp/controllers"
 
 	_ "github.com/go-sql-driver/mysql"
 )
