@@ -39,7 +39,11 @@
     <div class="container applybtn">
         <form method="post">
             {{if .IsOnline}}
-                <input type="submit" class="btn btn-primary" value="Apply!">
+                {{if .IsApplied}}
+                    <input type="submit" class="btn btn-secondary" disabled="disabled" value="You have applied!">
+                {{else}}
+                    <input type="submit" class="btn btn-primary" value="Apply!">
+                {{end}}
             {{else}}
                 <input type="submit" class="btn btn-secondary" disabled="disabled" value="Apply!">
             {{end}}

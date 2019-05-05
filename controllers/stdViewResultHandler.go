@@ -1,6 +1,7 @@
 package routerHandlers
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -10,9 +11,10 @@ import (
 )
 
 type displayResultHdr struct {
-	IsOnline bool
-	Username string
-	Job      Models.JobModel
+	IsOnline  bool
+	IsApplied bool
+	Username  string
+	Job       Models.JobModel
 }
 
 func StdViewResult(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +63,21 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 		err = DB.QueryRow("select companyname from cpyusers where id=?", job.Cpyid).Scan(&job.CpyName)
 		if ErrorHandler(w, err, "cpyname query failed.", 500) {
 			return
+		}
+
+		//check if is applied
+		if IsOnline {
+			stdid, err := GetID(session)
+			if ErrorHandler(w, err, "get id failed.", 500) {
+				return
+			}
+			var checkhold int
+			err = DB.QueryRow("select jid from application where jid=?, stdid=?", jid, stdid).Scan(&checkhold)
+			if err == sql.ErrNoRows {
+				displayResult.IsApplied = false
+			} else {
+				displayResult.IsApplied = true
+			}
 		}
 
 		displayResult.Job = job
