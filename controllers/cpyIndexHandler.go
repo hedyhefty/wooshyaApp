@@ -1,4 +1,4 @@
-package routerHandlers
+package controllers
 
 import (
 	"html/template"
@@ -16,7 +16,7 @@ func CpyIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cpyHptpl, err := template.ParseFiles(PPath+"/views/cpyIndex.html", PPath+"/views/hnavbartpl.html", PPath+"/views/bootstrapHeader.html")
+	cpyHptpl, err := template.ParseFiles(PPath+"/views/cpyIndex.html", hnavbartpl, bootstraptpl)
 	if err != nil {
 		panic(err.Error())
 		return

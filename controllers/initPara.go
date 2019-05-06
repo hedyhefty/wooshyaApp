@@ -1,9 +1,8 @@
-package routerHandlers
+package controllers
 
 import (
 	"database/sql"
 	"fmt"
-	"github.com/pkg/errors"
 	"net/http"
 	"os"
 	"strings"
@@ -11,8 +10,11 @@ import (
 
 var DB *sql.DB
 var PPath string
-var SessionMap map[string]*Session
+var navbartpl string
+var hnavbartpl string
+var bootstraptpl string
 
+var SessionMap map[string]*Session
 
 func init() {
 	var err error
@@ -20,10 +22,12 @@ func init() {
 	if err != nil {
 		panic(err.Error())
 	}
+
+	navbartpl = PPath + "/views/navbartpl.html"
+	hnavbartpl = PPath + "/views/hnavbartpl.html"
+	bootstraptpl = PPath + "/views/bootstrapHeader.html"
 	SessionMap = make(map[string]*Session)
 }
-
-
 
 //formatRequest generate ascii representation of a request.
 func FormatRequest(r *http.Request) string {
@@ -55,32 +59,3 @@ func FormatRequest(r *http.Request) string {
 	return strings.Join(request, "\n") + "\n"
 }
 
-func PraseDateTime(t string) string {
-	tmp := []byte(t)
-	tmp[10] = ' '
-	res := string(tmp)
-	return res + ":00"
-}
-
-func GetID(session *Session) (int, error) {
-	var id int
-	if session.SessionType == Student {
-		err := DB.QueryRow("SELECT id FROM stdusers WHERE username = ?", session.Username).Scan(&id)
-		if err != nil {
-			panic(err.Error())
-			return -1, errors.New("Unknow error form GetID.")
-		}
-		return id, nil
-	}
-
-	if session.SessionType == Company {
-		err := DB.QueryRow("SELECT id FROM cpyusers WHERE username = ?", session.Username).Scan(&id)
-		if err != nil {
-			panic(err.Error())
-			return -1, errors.New("Unknow error form GetID.")
-		}
-		return id, nil
-	}
-
-	return -1, errors.New("Unknow error form GetID.")
-}

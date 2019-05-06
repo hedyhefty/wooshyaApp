@@ -12,15 +12,14 @@
     </style>
 </head>
 <body>
-
+{{template "hnavbar" . }}
 
 <div class="container">
     <div class="container">
-        <h3>News you have posted</h3>
-        {{range .News}}
+        <h2>Processing Hire</h2>
+        {{range .Jobs}}
             <div class="container">
-
-                <a href="{{.NewsURL}}">{{.NewsTitle}}</a>
+                <a href="{{.JobURL}}">{{.Title}}</a>
             </div>
         {{end}}
     </div>

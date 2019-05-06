@@ -1,4 +1,4 @@
-package routerHandlers
+package controllers
 
 import (
 	"database/sql"
@@ -95,7 +95,7 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 		if ErrorHandler(w, err, "get id failed", 500) {
 			return
 		}
-		application := Models.ApplcationModel{Jid: jid, Stdid: stdid}
+		application := Models.ApplicationModel{Jid: jid, Stdid: stdid}
 		applydate := time.Now().Local()
 		_, err = DB.Exec("insert into application(jid,stdid,applydate) values (?,?,?)", application.Jid, application.Stdid, applydate)
 		if ErrorHandler(w, err, "Insert failed", 500) {
@@ -103,7 +103,7 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 		}
 
 		fmt.Println("applied.")
-		http.Redirect(w, r, "/", 303)
+		http.Redirect(w, r, "/stdSearchResultPage/viewResult", 303)
 
 	}
 

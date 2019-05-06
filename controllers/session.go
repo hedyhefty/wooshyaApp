@@ -1,4 +1,4 @@
-package routerHandlers
+package controllers
 
 import (
 	"crypto/rand"

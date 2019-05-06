@@ -25,7 +25,7 @@ func init() {
 		panic(err.Error())
 	}
 
-	routerHandlers.DB = DB
+	controllers.DB = DB
 }
 
 //handle err for defer db.close
@@ -45,28 +45,30 @@ func main() {
 	mux := http.NewServeMux()
 
 	//routers for student users
-	mux.HandleFunc("/", routerHandlers.StdIndex)
-	mux.HandleFunc("/stdSearchResultPage",routerHandlers.StdSearchResultPage)
-	mux.HandleFunc("/stdSearchResultPage/viewResult",routerHandlers.StdViewResult)
-	mux.HandleFunc("/stdNewsPage", routerHandlers.StdNewsPage)
-	mux.HandleFunc("/viewNews", routerHandlers.StdViewNews)
-	mux.HandleFunc("/stdLogin", routerHandlers.StdLogin)
-	mux.HandleFunc("/stdLogOut", routerHandlers.StdLogOut)
-	mux.HandleFunc("/stdSignUp", routerHandlers.StdSignUp)
-	mux.HandleFunc("/stdForgotPass", routerHandlers.StdForgotPass)
+	mux.HandleFunc("/", controllers.StdIndex)
+	mux.HandleFunc("/stdSearchResultPage", controllers.StdSearchResultPage)
+	mux.HandleFunc("/stdSearchResultPage/viewResult", controllers.StdViewResult)
+	mux.HandleFunc("/stdNewsPage", controllers.StdNewsPage)
+	mux.HandleFunc("/viewNews", controllers.StdViewNews)
+	mux.HandleFunc("/stdLogin", controllers.StdLogin)
+	mux.HandleFunc("/stdLogOut", controllers.StdLogOut)
+	mux.HandleFunc("/stdSignUp", controllers.StdSignUp)
+	mux.HandleFunc("/stdForgotPass", controllers.StdForgotPass)
 
 	//routers for company users
-	mux.HandleFunc("/cpyIndex", routerHandlers.CpyIndex)
-	mux.HandleFunc("/cpyIndex/profile", routerHandlers.CpyProfile)
-	mux.HandleFunc("/cpyIndex/releaseJob", routerHandlers.CpyReleaseJob)
-	mux.HandleFunc("/cpyIndex/releaseNews", routerHandlers.CpyReleaseNews)
-	mux.HandleFunc("/cpyIndex/processingNews", routerHandlers.CpyProcessingNews)
-	mux.HandleFunc("/cpyIndex/viewNews", routerHandlers.CpyViewNews)
+	mux.HandleFunc("/cpyIndex", controllers.CpyIndex)
+	mux.HandleFunc("/cpyIndex/profile", controllers.CpyProfile)
+	mux.HandleFunc("/cpyIndex/releaseJob", controllers.CpyReleaseJob)
+	mux.HandleFunc("/cpyIndex/releaseNews", controllers.CpyReleaseNews)
+	mux.HandleFunc("/cpyIndex/processingNews", controllers.CpyProcessingNews)
+	mux.HandleFunc("/cpyIndex/viewNews", controllers.CpyViewNews)
+	mux.HandleFunc("/cpyIndex/processingHire", controllers.CpyProcessingHire)
+	mux.HandleFunc("/cpyIndex/processingHire/viewHire",controllers.CpyViewHire)
 
-	mux.HandleFunc("/cpyLogin", routerHandlers.CpyLogin)
-	mux.HandleFunc("/cpyLogOut", routerHandlers.CpyLogOut)
-	mux.HandleFunc("/cpySignUp", routerHandlers.CpySignUp)
-	mux.HandleFunc("/cpyForgotPass", routerHandlers.CpyForgotPass)
+	mux.HandleFunc("/cpyLogin", controllers.CpyLogin)
+	mux.HandleFunc("/cpyLogOut", controllers.CpyLogOut)
+	mux.HandleFunc("/cpySignUp", controllers.CpySignUp)
+	mux.HandleFunc("/cpyForgotPass", controllers.CpyForgotPass)
 
 	server := &http.Server{Addr: ":8080", Handler: mux}
 	fmt.Printf("Server started, listen on port %s\n", server.Addr)

@@ -1,7 +1,7 @@
 package Models
 
-type ApplcationModel struct {
+type ApplicationModel struct {
 	Jid       int
 	Stdid     int
-	//ApplyDate string
+	ApplyDate string
 }

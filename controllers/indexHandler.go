@@ -1,4 +1,4 @@
-package routerHandlers
+package controllers
 
 import (
 	"fmt"
@@ -33,7 +33,7 @@ func StdIndex(w http.ResponseWriter, r *http.Request) {
 			navtpl.Username = session.Username
 		}
 
-		htmlHdr, err := template.ParseFiles(PPath+"/views/index.html", PPath+"/views/navbartpl.html", PPath+"/views/bootstrapHeader.html")
+		htmlHdr, err := template.ParseFiles(PPath+"/views/index.html", navbartpl, bootstraptpl)
 		if err != nil {
 			http.Error(w, "Prase html failed.", http.StatusInternalServerError)
 			return
@@ -59,10 +59,4 @@ func StdIndex(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ErrorHandler(w http.ResponseWriter, err error, errorString string, errCode int) bool {
-	if err != nil {
-		http.Error(w, errorString, errCode)
-		return true
-	}
-	return false
-}
+
