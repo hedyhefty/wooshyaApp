@@ -8,7 +8,7 @@ import (
 	"wooshyaApp/Models"
 )
 
-type displayHdr struct {
+type newsListdisplayHdr struct {
 	Username string
 	IsOnline bool
 	News     []Models.NewsModel
@@ -39,7 +39,7 @@ func CpyProcessingNews(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var displaytplhdr displayHdr
+	var displaytplhdr newsListdisplayHdr
 	displaytplhdr.Username = session.Username
 
 	for rows.Next() {

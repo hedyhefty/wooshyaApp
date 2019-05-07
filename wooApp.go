@@ -63,7 +63,9 @@ func main() {
 	mux.HandleFunc("/cpyIndex/processingNews", controllers.CpyProcessingNews)
 	mux.HandleFunc("/cpyIndex/viewNews", controllers.CpyViewNews)
 	mux.HandleFunc("/cpyIndex/processingHire", controllers.CpyProcessingHire)
-	mux.HandleFunc("/cpyIndex/processingHire/viewHire",controllers.CpyViewHire)
+	mux.HandleFunc("/cpyIndex/processingHire/viewHire", controllers.CpyViewHire)
+	mux.HandleFunc("/cpyIndex/processingHire/viewHire/viewApplicants", controllers.CpyViewApplicants)
+	mux.HandleFunc("/cpyIndex/processingHire/viewHire/viewApplicant/applicantProfile", controllers.CpyViewAppProfile)
 
 	mux.HandleFunc("/cpyLogin", controllers.CpyLogin)
 	mux.HandleFunc("/cpyLogOut", controllers.CpyLogOut)

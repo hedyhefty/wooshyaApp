@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"time"
+	"wooshyaApp/Models"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -25,30 +26,35 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	username := req.FormValue("username")
-	password := req.FormValue("password")
-	mailaddress := req.FormValue("mailaddress")
-	collegename := req.FormValue("collegename")
-	degree := req.FormValue("degree")
-	department := req.FormValue("department")
-	major := req.FormValue("major")
-	graduatedate := req.FormValue("graduatedate")
+	var stduser Models.StdUserModel
+
+	stduser.Username = req.FormValue("username")
+	stduser.Password = req.FormValue("password")
+	stduser.FirstName = req.FormValue("firstname")
+	stduser.LastName = req.FormValue("lastname")
+	stduser.MailAddress = req.FormValue("mailaddress")
+	stduser.CollegeName = req.FormValue("collegename")
+	stduser.Degree = req.FormValue("degree")
+	stduser.Department = req.FormValue("department")
+	stduser.Major = req.FormValue("major")
+	stduser.GraduateDate = req.FormValue("graduatedate")
+
 	lastlogindate := time.Now().Local()
 
-	var stduser string
-	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", username).Scan(&stduser)
+	var check_duplicate string
+	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", stduser.Username).Scan(&check_duplicate)
 
 	switch {
 	case err == sql.ErrNoRows:
 		// Username not exists
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(stduser.Password), bcrypt.DefaultCost)
 		if err != nil {
 			http.Error(res, "Server error, unable to create account", 500)
 			return
 		}
 
-		_, err = DB.Exec("INSERT INTO stdusers(username,password,mailaddress,collegename,degree,department,major,graduatedate,lastlogindate) VALUES(?,?,?,?,?,?,?,?,?)",
-			username, hashedPassword, mailaddress, collegename, degree, department, major, graduatedate, lastlogindate)
+		_, err = DB.Exec("INSERT INTO stdusers(username,password,firstname,lastname,mailaddress,collegename,degree,department,major,graduatedate,lastlogindate) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+			stduser.Username, hashedPassword, stduser.FirstName, stduser.LastName, stduser.MailAddress, stduser.CollegeName, stduser.Degree, stduser.Department, stduser.Major, stduser.GraduateDate, lastlogindate)
 
 		if err != nil {
 			http.Error(res, "Server error, unable to create account", 500)

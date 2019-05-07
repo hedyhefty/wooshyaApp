@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {{template "bootHeader" . }}
+    <style>
+        .container {
+            margin-top: 5%;
+        }
+
+    </style>
+</head>
+<body>
+{{template "hnavbar" . }}
+
+<div class="container">
+    <div class="container">
+        <h3>Applicant's Profile:</h3>
+        <p>name: {{.Student.FirstName}} {{.Student.LastName}}</p>
+        <p>graduated from: {{.Student.CollegeName}}, department of {{.Student.Department}}</p>
+        <p>major: {{.Student.Major}}</p>
+        <p>degree: {{.Student.Degree}}</p>
+        <p>graduate date: {{.Student.GraduateDate}}</p>
+    </div>
+</div>
+</body>
+</html>

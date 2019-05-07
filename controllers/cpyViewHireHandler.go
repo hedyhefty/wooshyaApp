@@ -2,10 +2,10 @@ package controllers
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 	"strconv"
 	"wooshyaApp/Models"
-	"html/template"
 )
 
 type displayhire struct {

@@ -19,7 +19,6 @@ func StdNewsPage(w http.ResponseWriter, r *http.Request) {
 	IsOnline, session := CheckLogin(Student, r)
 	//end check
 
-
 	//query db to get news title and id
 	rows, err := DB.Query("select news_id, news_title from news")
 
@@ -28,7 +27,7 @@ func StdNewsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var displayhdr displayHdr
+	var displayhdr newsListdisplayHdr
 
 	if IsOnline {
 		displayhdr.Username = session.Username

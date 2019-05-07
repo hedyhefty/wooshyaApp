@@ -72,11 +72,12 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			var checkhold int
-			err = DB.QueryRow("select jid from application where jid=?, stdid=?", jid, stdid).Scan(&checkhold)
-			if err == sql.ErrNoRows {
-				displayResult.IsApplied = false
-			} else {
+			err = DB.QueryRow("select jid from application where jid=? and stdid=?", jid, stdid).Scan(&checkhold)
+			if err != sql.ErrNoRows {
 				displayResult.IsApplied = true
+			} else {
+				displayResult.IsApplied = false
+				fmt.Println(checkhold)
 			}
 		}
 
@@ -103,7 +104,7 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 		}
 
 		fmt.Println("applied.")
-		http.Redirect(w, r, "/stdSearchResultPage/viewResult", 303)
+		http.Redirect(w, r, r.URL.Path+"?"+r.URL.RawQuery, 303)
 
 	}
 

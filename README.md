@@ -18,6 +18,8 @@ CREATE TABLE stdusers(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
     password VARCHAR(120),
+    firstname VARCHAR(50),
+    lastname VARCHAR(50),
     mailaddress VARCHAR(50),
     collegename VARCHAR(50),
     degree VARCHAR(50),

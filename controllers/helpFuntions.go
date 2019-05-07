@@ -1,17 +1,18 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/pkg/errors"
 	"net/http"
 )
 
-const(
+const (
 	GetIDError = "Get Id Error."
 
 	QueryError = "Query Error."
-	ScanError = "Scan Error."
+	ScanError  = "Scan Error."
 
-	TemplatePraseError = "Template Prase Error."
+	TemplatePraseError     = "Template Prase Error."
 	TemplateExecutionError = "Template Execution Error."
 )
 
@@ -48,6 +49,7 @@ func GetID(session *Session) (int, error) {
 func ErrorHandler(w http.ResponseWriter, err error, errorString string, errCode int) bool {
 	if err != nil {
 		http.Error(w, errorString, errCode)
+		fmt.Println(err.Error())
 		return true
 	}
 	return false
