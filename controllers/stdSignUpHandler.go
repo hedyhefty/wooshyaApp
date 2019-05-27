@@ -41,6 +41,10 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 
 	lastlogindate := time.Now().Local()
 
+	//prevent from sign up in the same time.
+	stdSignUplocker.Lock()
+	defer stdSignUplocker.Unlock()
+
 	var check_duplicate string
 	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", stduser.Username).Scan(&check_duplicate)
 

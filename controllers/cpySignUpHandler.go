@@ -32,6 +32,10 @@ func CpySignUp(w http.ResponseWriter, r *http.Request) {
 	telephonenumber := r.FormValue("telephonenumber")
 	lastlogindate := time.Now().Local()
 
+	//prevent from sign up in the same time.
+	cpySignUplocker.Lock()
+	defer cpySignUplocker.Unlock()
+
 	var cpyuser string
 	err := DB.QueryRow("SELECT username FROM cpyusers WHERE username = ?", username).Scan(&cpyuser)
 

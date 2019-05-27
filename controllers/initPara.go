@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
 )
 
 var DB *sql.DB
@@ -13,6 +14,8 @@ var PPath string
 var navbartpl string
 var hnavbartpl string
 var bootstraptpl string
+var stdSignUplocker sync.Mutex
+var cpySignUplocker sync.Mutex
 
 var SessionMap map[string]*Session
 
