@@ -27,7 +27,7 @@ func StdForgotPass(w http.ResponseWriter, r *http.Request) {
 
 	username := GetFromValue(r, "username")
 	mailaddress := GetFromValue(r, "mailaddress")
-	newpassword := GetFromValue(r, "newpassword")
+	newpassword := r.FormValue("newpassword")
 
 	var databaseMailadd string
 
