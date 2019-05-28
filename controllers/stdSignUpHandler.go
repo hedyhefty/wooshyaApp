@@ -29,10 +29,28 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 	var stduser Models.StdUserModel
 
 	stduser.Username = GetFromValue(req, "username")
-	stduser.Password = GetFromValue(req, "password")
+	ok, err := CheckUserName(stduser.Username)
+	if !ok || err != nil {
+		http.Error(res, "Invalid username.", 500)
+		return
+	}
+
+	stduser.Password = req.FormValue("password")
+	if len(stduser.Password) < 6 {
+		http.Error(res, "Invalid password.", 500)
+		return
+	}
+
 	stduser.FirstName = GetFromValue(req, "firstname")
 	stduser.LastName = GetFromValue(req, "lastname")
-	stduser.MailAddress = GetFromValue(req, "mailaddress")
+
+	stduser.MailAddress = req.FormValue("mailaddress")
+	matched, err := CheckMailAddress(stduser.MailAddress)
+	if !matched || err != nil {
+		http.Error(res, "Invalid mail address.", 500)
+		return
+	}
+
 	stduser.CollegeName = GetFromValue(req, "collegename")
 	stduser.Degree = GetFromValue(req, "degree")
 	stduser.Department = GetFromValue(req, "department")
@@ -46,7 +64,7 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 	defer stdSignUplocker.Unlock()
 
 	var check_duplicate string
-	err := DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", stduser.Username).Scan(&check_duplicate)
+	err = DB.QueryRow("SELECT username FROM stdusers WHERE username = ?", stduser.Username).Scan(&check_duplicate)
 
 	switch {
 	case err == sql.ErrNoRows:

@@ -28,7 +28,7 @@ func StdLogin(res http.ResponseWriter, req *http.Request) {
 
 	username := GetFromValue(req,"username")
 	fmt.Println(username)
-	password := GetFromValue(req,"password")
+	password := req.FormValue("password")
 
 	var databasePassword string
 

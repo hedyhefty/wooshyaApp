@@ -26,8 +26,25 @@ func CpySignUp(w http.ResponseWriter, r *http.Request) {
 	}
 
 	username := GetFromValue(r, "username")
-	password := GetFromValue(r, "password")
+	ok, err := CheckUserName(username)
+	if !ok || err != nil {
+		http.Error(w, "Invalid username.", 500)
+		return
+	}
+
+	password := r.FormValue("password")
+	if len(password) < 6 {
+		http.Error(w, "Invalid password.", 500)
+		return
+	}
+
 	mailaddress := GetFromValue(r, "mailaddress")
+	ok, err = CheckMailAddress(mailaddress)
+	if !ok || err != nil {
+		http.Error(w, "Invalid mailaddress.", 500)
+		return
+	}
+
 	companyname := GetFromValue(r, "companyname")
 	telephonenumber := GetFromValue(r, "telephonenumber")
 	lastlogindate := time.Now().Local()
@@ -37,7 +54,7 @@ func CpySignUp(w http.ResponseWriter, r *http.Request) {
 	defer cpySignUplocker.Unlock()
 
 	var cpyuser string
-	err := DB.QueryRow("SELECT username FROM cpyusers WHERE username = ?", username).Scan(&cpyuser)
+	err = DB.QueryRow("SELECT username FROM cpyusers WHERE username = ?", username).Scan(&cpyuser)
 
 	switch {
 	case err == sql.ErrNoRows:

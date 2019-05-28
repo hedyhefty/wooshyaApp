@@ -5,6 +5,7 @@ import (
 	"github.com/pkg/errors"
 	"html/template"
 	"net/http"
+	"regexp"
 )
 
 const (
@@ -58,4 +59,19 @@ func ErrorHandler(w http.ResponseWriter, err error, errorString string, errCode 
 
 func GetFromValue(r *http.Request, s string) string {
 	return template.HTMLEscapeString(r.FormValue(s))
+}
+
+func CheckUserName(username string) (bool, error) {
+	matched, err := regexp.MatchString(`^[0-9A-Za-z]+$`, username)
+	if len(username) < 6 {
+		matched = false
+	}
+
+	return matched, err
+}
+
+func CheckMailAddress(mailaddress string) (bool, error) {
+	matched, err := regexp.MatchString(`^([\w\.\_]{2,10})@(\w{1,}).([a-z]{2,4})$`, mailaddress)
+
+	return matched, err
 }
