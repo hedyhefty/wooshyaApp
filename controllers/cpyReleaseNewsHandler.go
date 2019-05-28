@@ -35,8 +35,8 @@ func CpyReleaseNews(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "POST" {
-		news_title := r.FormValue("news_title")
-		news_content := r.FormValue("news_content")
+		news_title := GetFromValue(r, "news_title")
+		news_content := GetFromValue(r, "news_content")
 		release_date := time.Now().Local()
 		var cpy_id int
 		err := DB.QueryRow("select id from cpyusers where username = ?", session.Username).Scan(&cpy_id)

@@ -25,9 +25,9 @@ func CpyForgotPass(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	username := r.FormValue("username")
-	mailaddress := r.FormValue("mailaddress")
-	newpassword := r.FormValue("newpassword")
+	username := GetFromValue(r, "username")
+	mailaddress := GetFromValue(r, "mailaddress")
+	newpassword := GetFromValue(r, "newpassword")
 
 	var databaseMailadd string
 

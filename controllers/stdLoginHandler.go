@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"time"
@@ -24,8 +25,10 @@ func StdLogin(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	username := req.FormValue("username")
-	password := req.FormValue("password")
+
+	username := GetFromValue(req,"username")
+	fmt.Println(username)
+	password := GetFromValue(req,"password")
 
 	var databasePassword string
 

@@ -48,8 +48,8 @@ func StdIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "POST" {
-		keywords := r.FormValue("keywords")
-		searchtype := r.FormValue("search_type")
+		keywords := GetFromValue(r, "keywords")
+		searchtype := GetFromValue(r, "search_type")
 
 		res_url := "/stdSearchResultPage?keywords=" + keywords + "&searchtype=" + searchtype
 
@@ -58,5 +58,3 @@ func StdIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-
-

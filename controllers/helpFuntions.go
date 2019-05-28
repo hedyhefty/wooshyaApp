@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"github.com/pkg/errors"
+	"html/template"
 	"net/http"
 )
 
@@ -53,4 +54,8 @@ func ErrorHandler(w http.ResponseWriter, err error, errorString string, errCode 
 		return true
 	}
 	return false
+}
+
+func GetFromValue(r *http.Request, s string) string {
+	return template.HTMLEscapeString(r.FormValue(s))
 }

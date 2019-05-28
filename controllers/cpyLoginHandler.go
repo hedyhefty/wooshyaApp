@@ -30,8 +30,8 @@ func CpyLogin(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	username := req.FormValue("username")
-	password := req.FormValue("password")
+	username := GetFromValue(req, "username")
+	password := GetFromValue(req, "password")
 
 	var databasePassword string
 

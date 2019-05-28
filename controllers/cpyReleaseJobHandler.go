@@ -23,15 +23,15 @@ func CpyReleaseJob(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "POST" {
-		jtitle := r.FormValue("jtitle")
-		jdescribe := r.FormValue("jdescribe")
-		jsalary := r.FormValue("jsalary")
-		jlocation := r.FormValue("jlocation")
-		jotherdetails := r.FormValue("jotherdetails")
+		jtitle := GetFromValue(r, "jtitle")
+		jdescribe := GetFromValue(r, "jdescribe")
+		jsalary := GetFromValue(r, "jsalary")
+		jlocation := GetFromValue(r, "jlocation")
+		jotherdetails := GetFromValue(r, "jotherdetails")
 
 		//2019-04-15T01:59
-		startdate := r.FormValue("startdate")
-		deadline := r.FormValue("deadline")
+		startdate := GetFromValue(r, "startdate")
+		deadline := GetFromValue(r, "deadline")
 
 		startdate = PraseDateTime(startdate)
 		deadline = PraseDateTime(deadline)

@@ -6,9 +6,12 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"sync"
 	"time"
 	"wooshyaApp/Models"
 )
+
+var applyLock sync.Mutex
 
 type displayResultHdr struct {
 	IsOnline  bool
@@ -92,19 +95,32 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
 		stdid, err := GetID(session)
-		fmt.Println(stdid)
+		//fmt.Println(stdid)
 		if ErrorHandler(w, err, "get id failed", 500) {
 			return
 		}
 		application := Models.ApplicationModel{Jid: jid, Stdid: stdid}
-		applydate := time.Now().Local()
-		_, err = DB.Exec("insert into application(jid,stdid,applydate) values (?,?,?)", application.Jid, application.Stdid, applydate)
-		if ErrorHandler(w, err, "Insert failed", 500) {
-			return
-		}
 
-		fmt.Println("applied.")
-		http.Redirect(w, r, r.URL.Path+"?"+r.URL.RawQuery, 303)
+		applyLock.Lock()
+		defer applyLock.Unlock()
+
+		var scanhold int
+
+		row := DB.QueryRow("select jid from application where jid=?,stdid=?", application.Jid, application.Stdid)
+		err = row.Scan(&scanhold)
+
+		if err == sql.ErrNoRows {
+			applydate := time.Now().Local()
+			_, err = DB.Exec("insert into application(jid,stdid,applydate) values (?,?,?)", application.Jid, application.Stdid, applydate)
+			if ErrorHandler(w, err, "Insert failed", 500) {
+				return
+			}
+
+			fmt.Println("applied.")
+			http.Redirect(w, r, r.URL.Path+"?"+r.URL.RawQuery, 303)
+		} else {
+			http.Error(w, "You have applied.", 500)
+		}
 
 	}
 

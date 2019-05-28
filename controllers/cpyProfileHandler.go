@@ -26,8 +26,8 @@ func CpyProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "POST" {
-		category := r.FormValue("category")
-		description := r.FormValue("description")
+		category := GetFromValue(r, "category")
+		description := GetFromValue(r, "description")
 		fmt.Println("description is: ", description)
 
 		updateProfilehandler, err := DB.Prepare("UPDATE cpyusers SET category = ?, description = ? WHERE username = ?")

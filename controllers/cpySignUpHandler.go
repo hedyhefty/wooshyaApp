@@ -25,11 +25,11 @@ func CpySignUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-	mailaddress := r.FormValue("mailaddress")
-	companyname := r.FormValue("companyname")
-	telephonenumber := r.FormValue("telephonenumber")
+	username := GetFromValue(r, "username")
+	password := GetFromValue(r, "password")
+	mailaddress := GetFromValue(r, "mailaddress")
+	companyname := GetFromValue(r, "companyname")
+	telephonenumber := GetFromValue(r, "telephonenumber")
 	lastlogindate := time.Now().Local()
 
 	//prevent from sign up in the same time.

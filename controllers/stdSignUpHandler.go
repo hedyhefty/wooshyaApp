@@ -28,16 +28,16 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 
 	var stduser Models.StdUserModel
 
-	stduser.Username = req.FormValue("username")
-	stduser.Password = req.FormValue("password")
-	stduser.FirstName = req.FormValue("firstname")
-	stduser.LastName = req.FormValue("lastname")
-	stduser.MailAddress = req.FormValue("mailaddress")
-	stduser.CollegeName = req.FormValue("collegename")
-	stduser.Degree = req.FormValue("degree")
-	stduser.Department = req.FormValue("department")
-	stduser.Major = req.FormValue("major")
-	stduser.GraduateDate = req.FormValue("graduatedate")
+	stduser.Username = GetFromValue(req, "username")
+	stduser.Password = GetFromValue(req, "password")
+	stduser.FirstName = GetFromValue(req, "firstname")
+	stduser.LastName = GetFromValue(req, "lastname")
+	stduser.MailAddress = GetFromValue(req, "mailaddress")
+	stduser.CollegeName = GetFromValue(req, "collegename")
+	stduser.Degree = GetFromValue(req, "degree")
+	stduser.Department = GetFromValue(req, "department")
+	stduser.Major = GetFromValue(req, "major")
+	stduser.GraduateDate = GetFromValue(req, "graduatedate")
 
 	lastlogindate := time.Now().Local()
 
