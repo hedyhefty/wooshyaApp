@@ -29,12 +29,12 @@
     </script>
 
 </head>
-<body class="bg">
+<body>
 {{template "navbar" . }}
 
 <div class="container searcharea text-center">
-    <div class="container">
-        <h1>WooFIND</h1>
+    <div class="container wf">
+        WooSearch
     </div>
     <div class="container col-8 searchbar">
         <form method="POST">
@@ -49,7 +49,7 @@
                 </select>
                 <input type="text" class="form-control" placeholder="Keywords" name="keywords">
                 <div class="input-group-append">
-                    <input type="submit" value="Search!" class="btn btn-outline-secondary">
+                    <input type="submit" value="Search!" class="btn btn-outline-light">
                 </div>
             </div>
         </form>

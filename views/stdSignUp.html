@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <!--link rel="stylesheet" type="text/css" href="cssfiles/trycss.css"-->
+    <link rel="stylesheet" href="/views/static/stdSignUp.css">
     {{template "bootHeader" . }}
-    <style>
-        .container{
-            margin-top: 5%;
-        }
 
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark text-white">
@@ -19,56 +14,48 @@
 
 <div class="container text-center">
     <div class="container col-md-5">
-        <h3>Sign Up your account!</h3>
-        <form method="POST" action="/stdSignUp">
-            <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="username (at least 6 characters, no special symbols)">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="password (at least 6 characters)">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="firstname" placeholder="firstname">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="lastname" placeholder="lastname">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="mailaddress" placeholder="mail@box.com">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="collegename" placeholder="collegename">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="degree" placeholder="degree">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="department" placeholder="department">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="major" placeholder="major">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="graduatedate" placeholder="your graduate date">
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-info" value="Submit!">
-            </div>
-        </form>
+        <div class="container tit">
+            Sign Up your account!
+        </div>
+        <div class="container block">
+            <form method="POST" action="/stdSignUp">
+                <div class="form-group usn">
+                    <input type="text" class="form-control" name="username" placeholder="username (at least 6 characters, no special symbols)">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="password (at least 6 characters)">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="firstname" placeholder="firstname">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="lastname" placeholder="lastname">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="mailaddress" placeholder="mail@box.com">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="collegename" placeholder="collegename">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="degree" placeholder="degree">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="department" placeholder="department">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="major" placeholder="major">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="graduatedate" placeholder="your graduate date">
+                </div>
+                <div class="form-group sbb">
+                    <input type="submit" class="btn btn-info" value="Submit!">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<!--h1>Sign up</h1>
-<form method="POST" action="/stdSignUp">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <input type="text" name="mailaddress">
-    <input type="text" name="collegename">
-    <input type="text" name="degree">
-    <input type="text" name="department">
-    <input type="text" name="major">
-    <input type="text" name="graduatedate">
-    <input type="submit" name="Submit">
-</form-->
 </body>
 </html>

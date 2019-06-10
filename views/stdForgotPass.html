@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>WooShya!</title>
+    <link rel="stylesheet" href="/views/static/stdForgotPass.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 12%;
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar bg-dark navbar-dark text-white">
@@ -16,7 +12,9 @@
 </nav>
 <div class="container text-center">
     <div class="container col-md-5">
-        <h4>Set your new password</h4>
+        <div class="container tit">
+            Reset Password
+        </div>
         <form method="post" action="/stdForgotPass">
             <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="username">

@@ -1,16 +1,4 @@
-.container {
-    margin-top: 5%;
-}
-
-.slogan {
-    margin-top: 16%;
-}
-
-.loginContainer {
-    margin-top: 12%;
-}
-
-.bg {
+body {
     /* The image used */
     background-image: url("/views/static/bcg.png");
 
@@ -21,6 +9,18 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.container {
+    margin-top: 5%;
+}
+
+.slogan {
+    margin-top: 16%;
+}
+
+.loginContainer {
+    margin-top: 12%;
 }
 
 .btn-link {

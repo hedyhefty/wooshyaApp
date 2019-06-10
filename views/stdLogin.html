@@ -2,22 +2,18 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <!--link rel="stylesheet" type="text/css" href="cssfiles/trycss.css"-->
+    <link rel="stylesheet" href="/views/static/stdLogin.css">
     {{template "bootHeader" . }}
-    <style>
-        .container{
-            margin-top: 12%;
-        }
-
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark text-white">
     <a class="navbar-brand" href="/">Wooshya!</a>
 </nav>
 <div class="container text-center">
-    <div class="container col-md-5">
-        <h3>LOGIN</h3>
+    <div class="container col-md-5 outside">
+        <div class="container lgi">
+            LOGIN
+        </div>
         <form method="POST" action="/stdLogin">
             <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="Username">
@@ -29,7 +25,7 @@
                 <input type="submit" class="btn btn-info" value="LOGIN!">
             </div>
             <div class="form-group">
-                <a href="/stdForgotPass" class="btn btn-link">Forget Password?</a>
+                <a href="/stdForgotPass" class="btn btn-link" style="color: white">Forget Password?</a>
             </div>
         </form>
     </div>
