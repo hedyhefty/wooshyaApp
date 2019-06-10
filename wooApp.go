@@ -44,6 +44,8 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	mux.Handle("/views/",http.StripPrefix("/views/",http.FileServer(http.Dir("views"))))
+
 	//routers for student users
 	mux.HandleFunc("/", controllers.StdIndex)
 	mux.HandleFunc("/stdSearchResultPage", controllers.StdSearchResultPage)

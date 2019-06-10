@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="/views/static/index.css">
     {{template "bootHeader" . }}
-    <style>
-
-        .searcharea{
+    <!--style>
+        .searcharea {
             margin-top: 8%;
         }
-        .searchbar{
+
+        .searchbar {
             margin-top: 2%;
         }
-    </style>
+    </style-->
     <script>
         function stdLogin() {
             location.href = "/stdLogin"
@@ -28,7 +29,7 @@
     </script>
 
 </head>
-<body>
+<body class="bg">
 {{template "navbar" . }}
 
 <div class="container searcharea text-center">

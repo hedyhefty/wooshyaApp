@@ -1,0 +1,20 @@
+.bg {
+    /* The image used */
+    background-image: url("/views/static/indexbg.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.searcharea {
+    margin-top: 12%;
+}
+
+.searchbar {
+    margin-top: 4%;
+}

@@ -1,0 +1,28 @@
+.container {
+    margin-top: 5%;
+}
+
+.slogan {
+    margin-top: 16%;
+}
+
+.loginContainer {
+    margin-top: 12%;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("/views/static/bcg.png");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-link {
+    color: white;
+}
