@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/cpyViewApplicants.css">
     {{template "bootHeader" . }}
 
 </head>
@@ -10,13 +11,13 @@
 {{template "hnavbar" . }}
 
 <div class="container">
-    <div class="container">
-        <p>Applicant List:</p>
+    <div class="container tit">
+        Applicant List:
     </div>
 
     {{range .Students}}
-        <div class="container">
-            <a href="{{.StdURL}}">{{.FirstName}} {{.LastName}}</a>
+        <div class="container aholder">
+            <a href="{{.StdURL}}" style="color: black">{{.FirstName}} {{.LastName}}</a>
         </div>
     {{end}}
 

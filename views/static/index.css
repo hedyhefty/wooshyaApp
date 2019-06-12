@@ -19,6 +19,13 @@ body {
     margin-top: 12%;
 }
 
+.gohey {
+    padding-top: 12%;
+    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+    font-size: 1.1rem;
+    color: aliceblue;
+}
+
 .searchbar {
     margin-top: 2%;
 }

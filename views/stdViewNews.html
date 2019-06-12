@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/stdViewNews.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "navbar" . }}
 
 <div class="container">
+    <div class="container tit">
+        {{.News.NewsTitle}}
+    </div>
     <div class="container">
-        <h3>{{.News.NewsTitle}}</h3>
-        <p>release date: {{.News.ReleaseDate}}</p>
-        <p>from: {{.News.CpyName}}</p>
-        <div class="container">
-            {{.News.NewsContent}}
-        </div>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td><b>Release date:</b></td>
+                <td>{{.News.ReleaseDate}}</td>
+            </tr>
+            <tr>
+                <td><b>From:</b></td>
+                <td>{{.News.CpyName}}</td>
+            </tr>
+            <tr>
+                <td><b>Content:</b></td>
+                <td>{{.News.NewsContent}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

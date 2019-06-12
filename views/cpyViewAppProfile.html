@@ -3,25 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/cpyViewAppProfile.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "hnavbar" . }}
 
 <div class="container">
+    <div class="container tit">
+        Applicant's Profile:
+    </div>
     <div class="container">
-        <h3>Applicant's Profile:</h3>
-        <p>name: {{.Student.FirstName}} {{.Student.LastName}}</p>
-        <p>graduated from: {{.Student.CollegeName}}, department of {{.Student.Department}}</p>
-        <p>major: {{.Student.Major}}</p>
-        <p>degree: {{.Student.Degree}}</p>
-        <p>graduate date: {{.Student.GraduateDate}}</p>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td><b>Name:</b></td>
+                <td>{{.Student.FirstName}} {{.Student.LastName}}</td>
+            </tr>
+            <tr>
+                <td><b>Graduate from:</b></td>
+                <td>{{.Student.CollegeName}}, department of {{.Student.Department}}</td>
+            </tr>
+            <tr>
+                <td><b>Major:</b></td>
+                <td>{{.Student.Major}}</td>
+            </tr>
+            <tr>
+                <td><b>Degree:</b></td>
+                <td>{{.Student.Degree}}</td>
+            </tr>
+            <tr>
+                <td><b>Graduate date:</b></td>
+                <td>{{.Student.GraduateDate}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

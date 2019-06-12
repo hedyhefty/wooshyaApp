@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/stdNewsPage.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "navbar" . }}
 
 <div class="container">
-    <div class="container">
-        <h2>News</h2>
-        {{range .News}}
-            <div class="container">
-
-                <a href="{{.NewsURL}}">{{.NewsTitle}}</a>
-            </div>
-        {{end}}
+    <div class="container tit">
+        News
     </div>
+
+    {{range .News}}
+        <div class="container nholder">
+            <a href="{{.NewsURL}}" style="color: black">{{.NewsTitle}}</a>
+        </div>
+    {{end}}
+
 </div>
 </body>
 </html>
