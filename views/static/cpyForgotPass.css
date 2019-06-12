@@ -9,13 +9,16 @@ body {
     background-position: 0px -140px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
 }
 
-.bodyhold{
-    margin-top: 15%;
+.tit{
     font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
-    font-size: 3rem;
+    font-size: 2rem;
     color: white;
+    margin-top: 2%;
     margin-bottom: 2%;
+}
+
+.container {
+    margin-top: 12%;
 }

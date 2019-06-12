@@ -2,50 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
+    <link rel="stylesheet" href="/views/static/cpyReleaseJob.css">
     {{template "bootHeader" . }}
-    <style>
-        .container{
-            margin-top: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "hnavbar" . }}
 
 <div class="container text-center">
     <div class="container col-md-5">
-        <h3>Post your job description</h3>
-        <form method="POST" action="/cpyIndex/releaseJob">
-            <div class="form-group">
-                <input type="text" class="form-control" name="jtitle" placeholder="Title of the Job.">
-            </div>
-            <div class="form-group">
+        <div class="container tit">
+            Post your job description
+        </div>
+        <div class="container inputarea">
+            <form method="POST" action="/cpyIndex/releaseJob">
+                <div class="form-group ptop">
+                    <input type="text" class="form-control" name="jtitle" placeholder="Title of the Job.">
+                </div>
+                <div class="form-group">
                 <textarea class="form-control rounded-0" name="jdescribe" rows="3"
                           placeholder="Please describe the details of this position..."></textarea>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="jsalary" placeholder="tell about the salary...">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="jlocation" placeholder="Work place...">
-            </div>
-            <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="jsalary" placeholder="tell about the salary...">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="jlocation" placeholder="Work place...">
+                </div>
+                <div class="form-group">
                 <textarea class="form-control rounded-0" name="jotherdetails" rows="3"
                           placeholder="Anything else..."></textarea>
-            </div>
-            <div class="form-group">
-                Start Date: <input class="form-control" type="datetime-local" name="startdate">
-            </div>
-            <div class="form-group">
-                Deadline : <input class="form-control" type="datetime-local" name="deadline">
-            </div>
+                </div>
+                <div class="form-group">
+                    Start Date: <input class="form-control" type="datetime-local" name="startdate">
+                </div>
+                <div class="form-group">
+                    Deadline : <input class="form-control" type="datetime-local" name="deadline">
+                </div>
 
-            <div class="form-group">
-                <input type="submit" class="btn btn-info" value="Submit!">
-            </div>
-        </form>
+                <div class="form-group pbot">
+                    <input type="submit" class="btn btn-info" value="Submit!">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>

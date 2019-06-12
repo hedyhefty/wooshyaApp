@@ -1,14 +1,15 @@
 body {
     /* The image used */
-    background-image: url("/views/static/bcg.png");
+    background-image: url("/views/static/hbg.jpg");
 
     /* Full height */
     height: 100%;
 
     /* Center and scale the image nicely */
-    background-position: center;
+    background-position: 0px -140px;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .container {

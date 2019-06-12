@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/cpyReleaseNews.css">
     {{template "bootHeader" . }}
-    <style>
-        .container{
-            margin-top: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "hnavbar" . }}
 
 <div class="container text-center">
     <div class="container col-md-5">
-        <h3>Post your News</h3>
+        <div class="container tit">
+            Post your news!
+        </div>
         <form method="POST" action="/cpyIndex/releaseNews">
             <div class="form-group">
                 <input type="text" class="form-control" name="news_title" placeholder="Title of the News.">

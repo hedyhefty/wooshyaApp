@@ -4,37 +4,45 @@
     <meta charset="UTF-8">
 
     {{template "bootHeader" . }}
+    <link rel="stylesheet" href="/views/static/cpyProfile.css">
+    <script src="/views/static/cpyProfile.js"></script>
     <title></title>
-    <style>
-        .container {
-            margin-top: 5%;
-        }
-
-        #settingProfile {
-            display: none;
-        }
-
-    </style>
-    <script>
-        function setProfile() {
-            var disable_target = document.getElementById("displayProfile");
-            disable_target.style.display = "none";
-
-            var enable_target = document.getElementById("settingProfile");
-            enable_target.style.display = "block";
-        }
-    </script>
 </head>
 <body>
 {{template "hnavbar" . }}
-<div class="container text-center" id="displayProfile">
-    <p>company name: {{.Cpyname}}</p>
-    <p>catagory: {{.Cpycategory}}</p>
-    <p>description: {{.Cpydescription}}</p>
-    <button id="setprofile" onclick="setProfile()" class="btn btn-info">Set Profile</button>
+<div class="container" id="displayProfile">
+    <div class="container tit text-center">
+        Profiles page
+    </div>
+    <div class="container protable col-md-5">
+        <table class="table" align="center">
+            <tbody>
+            <tr>
+                <td><b>Company name:</b></td>
+                <td>{{.Cpyname}}</td>
+            </tr>
+            <tr>
+                <td><b>Category:</b></td>
+                <td>{{.Cpycategory}}</td>
+            </tr>
+            <tr>
+                <td><b>Description:</b></td>
+                <td>{{.Cpydescription}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="container text-center">
+        <button id="setprofile" onclick="setProfile()" class="btn btn-info">Set Profile</button>
+    </div>
+
 </div>
 <div class="container text-center" id="settingProfile">
     <div class="container col-md-5">
+        <div class="container tit">
+            Set your Profile
+        </div>
         <form method="POST" action="/cpyIndex/profile">
             <div class="form-group">
                 <input type="text" class="form-control" name="category"

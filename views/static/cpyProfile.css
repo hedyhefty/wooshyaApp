@@ -1,21 +1,30 @@
 body {
     /* The image used */
-    background-image: url("/views/static/hbg.jpg");
+    background-image: url("/views/static/pbg.jpg");
 
     /* Full height */
     height: 100%;
 
     /* Center and scale the image nicely */
-    background-position: 0px -140px;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 
-.bodyhold{
-    margin-top: 15%;
+#displayProfile{
+    padding-top: 8%;
+}
+
+#settingProfile {
+    padding-top: 9%;
+    display: none;
+}
+
+.tit {
     font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
-    font-size: 3rem;
-    color: white;
+    font-size: 2rem;
+
+    margin-top: 2%;
     margin-bottom: 2%;
 }

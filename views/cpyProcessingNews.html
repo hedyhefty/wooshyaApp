@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/cpyProcessingNews.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 5%;
-        }
-
-    </style>
+    {{template "hnavbar" . }}
 </head>
 <body>
 
-
-<div class="container">
+<div class="container out">
     <div class="container">
-        <h3>News you have posted</h3>
+        <div class="container tit">
+            News you have posted
+        </div>
         {{range .News}}
-            <div class="container">
-
-                <a href="{{.NewsURL}}">{{.NewsTitle}}</a>
+            <div class="container nholder">
+                <a href="{{.NewsURL}}" style="color: black">{{.NewsTitle}}</a>
             </div>
         {{end}}
     </div>

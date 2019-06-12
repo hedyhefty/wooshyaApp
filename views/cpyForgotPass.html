@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>HeyShya!</title>
+    <link rel="stylesheet" href="/views/static/cpyForgotPass.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 12%;
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar bg-dark navbar-dark text-white">
@@ -16,7 +12,9 @@
 </nav>
 <div class="container text-center">
     <div class="container col-md-5">
-        <h4>Set your new password</h4>
+        <div class="container tit">
+            Set your new password
+        </div>
         <form method="post" action="/cpyForgotPass">
             <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="username">
@@ -28,7 +26,7 @@
                 <input type="password" class="form-control" name="newpassword" placeholder="new password">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-info" value="RESET PASSWORD">
+                <input type="submit" class="btn btn-outline-light" value="RESET PASSWORD">
             </div>
         </form>
     </div>
