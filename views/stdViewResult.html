@@ -3,38 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/stdViewResult.css">
     {{template "bootHeader" . }}
-    <style>
-        .title {
-            margin-top: 5%;
-        }
-
-        .applybtn {
-            margin-bottom: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "navbar" . }}
 
-<div class="container">
-    <div class="container title">
-        <h3>{{.Job.Title}}</h3>
-        <p>release date: {{.Job.ReleaseDate}}</p>
-        <p>from: {{.Job.CpyName}}</p>
-        <div class="container">
-            <p>Job description:</p>
-            {{.Job.Describe}}
-        </div>
-        <p>work place: {{.Job.Location}}</p>
-        <p>salary: {{.Job.Salary}}</p>
-        <div class="container">
-            <p>Other details:</p>
-            {{.Job.OtherDetails}}
-        </div>
-        <p>applcation start date: {{.Job.StartDate}}</p>
-        <p>applcation deadline: {{.Job.Deadline}}</p>
+<div class="container wbg">
+
+    <div class="container tit">
+        {{.Job.Title}}
+    </div>
+    <div class="container">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td><b>From:</b></td>
+                <td>{{.Job.CpyName}}</td>
+            </tr>
+            <tr>
+                <td><b>Job details:</b></td>
+                <td>{{.Job.Describe}}</td>
+            </tr>
+            <tr>
+                <td><b>Work place:</b></td>
+                <td>{{.Job.Location}}</td>
+            </tr>
+            <tr>
+                <td><b>Salary:</b></td>
+                <td>{{.Job.Salary}}</td>
+            </tr>
+            <tr>
+                <td><b>Supplement:</b></td>
+                <td>{{.Job.OtherDetails}}</td>
+            </tr>
+            <tr>
+                <td><b>Applcation start date:</b></td>
+                <td>{{.Job.StartDate}}</td>
+            </tr>
+            <tr>
+                <td><b>Applcation deadline:</b></td>
+                <td>{{.Job.Deadline}}</td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
     <div class="container applybtn">
         <form method="post">
@@ -45,7 +58,7 @@
                     <input type="submit" class="btn btn-primary" value="Apply!">
                 {{end}}
             {{else}}
-                <input type="submit" class="btn btn-secondary" disabled="disabled" value="Apply!">
+                <input type="submit" class="btn btn-secondary" disabled="disabled" value="You have to login before apply">
             {{end}}
         </form>
     </div>

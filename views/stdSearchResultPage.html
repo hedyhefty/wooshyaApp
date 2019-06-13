@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/views/static/stdSearchResultPage.css">
     {{template "bootHeader" . }}
-    <style>
-        .container {
-            margin-top: 5%;
-        }
-
-    </style>
 </head>
 <body>
 {{template "navbar" . }}
 
-<div class="container">
-    <div class="container">
-        <h2>Search Result</h2>
-        {{range .Jobs}}
-            <div class="container">
-
-                <a href="{{.JobURL}}">{{.Title}}</a>
-            </div>
-        {{end}}
+<div class="container wbg">
+    <div class="container tit">
+        Search result
     </div>
+
+    {{range .Jobs}}
+        <div class="container rholder">
+            <a href="{{.JobURL}}" style="color: black">{{.Title}}</a>
+        </div>
+    {{end}}
+
 </div>
 </body>
 </html>
