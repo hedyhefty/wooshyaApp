@@ -1,0 +1,28 @@
+body {
+    /* The image used */
+    background-image: url("/views/static/indexbg.jpg"), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-size: cover;
+}
+
+.mbox {
+    margin-top: 14%;
+    background-color: #fefefe;
+}
+
+.tit {
+    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+    font-size: 1.2rem;
+
+    padding-top: 4%;
+    margin-bottom: 9%;
+}
+
+.okbtn {
+    padding-bottom: 4%;
+    font-size: 1.2rem;
+}

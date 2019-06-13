@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -37,31 +38,33 @@ func CpyLogin(res http.ResponseWriter, req *http.Request) {
 	var databasePassword string
 
 	err := DB.QueryRow("select password from cpyusers where username = ?", username).Scan(&databasePassword)
+
+	if err == sql.ErrNoRows {
+		http.Redirect(res, req, "/cpyMessage?mtype=7", 301)
+	}
+
 	if err != nil {
-		// todo: add a info box including "Username not existed"
-		http.Redirect(res, req, "/cpyLogin", 301)
-		return
+		//http.Redirect(res, req, "/cpyLogin", 301)
+		http.Redirect(res, req, "/cpyMessage?mtype=6", 301)
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
 	if err != nil {
-		// todo: add a info box including "Wrong password"
-		fmt.Println("wrong password.")
-		http.Redirect(res, req, "/cpyLogin", 301)
+		//fmt.Println("wrong password.")
+		http.Redirect(res, req, "/cpyMessage?mtype=8", 301)
 		return
 	}
 
 	updateDatehandler, err := DB.Prepare("UPDATE cpyusers SET lastlogindate = ? WHERE username = ?")
 	if err != nil {
-		// todo: add a info box to inform loginDate error
-		http.Redirect(res, req, "/cpyLogin", 301)
+		http.Redirect(res, req, "/cpyMessage?mtype=6", 301)
 		return
 	}
 
 	logindate := time.Now().Local()
 	_, err = updateDatehandler.Exec(logindate, username)
 	if err != nil {
-		http.Redirect(res, req, "/cpyLogin", 301)
+		http.Redirect(res, req, "/cpyMessage?mtype=6", 301)
 		return
 	}
 

@@ -21,7 +21,8 @@ func CpyProfile(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(requestHeader)
 	IsOnline, session := CheckLogin(Company, r)
 	if !IsOnline {
-		http.Redirect(w, r, "/cpyLogin", http.StatusSeeOther)
+		//http.Redirect(w, r, "/cpyLogin", http.StatusSeeOther)
+		http.Redirect(w, r, "/cpyMessage?mtype=14", 301)
 		return
 	}
 

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -11,8 +12,8 @@ import (
 
 func StdLogin(res http.ResponseWriter, req *http.Request) {
 	if (*req).Method != "POST" {
-		logintpl, err := template.ParseFiles(PPath + "/views/stdLogin.html", PPath + "/views/bootstrapHeader.html")
-		if err != nil{
+		logintpl, err := template.ParseFiles(PPath+"/views/stdLogin.html", PPath+"/views/bootstrapHeader.html")
+		if err != nil {
 			panic(err.Error())
 			return
 		}
@@ -25,8 +26,7 @@ func StdLogin(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-
-	username := GetFromValue(req,"username")
+	username := GetFromValue(req, "username")
 	fmt.Println(username)
 	password := req.FormValue("password")
 
@@ -34,27 +34,31 @@ func StdLogin(res http.ResponseWriter, req *http.Request) {
 
 	err := DB.QueryRow("SELECT password FROM stdusers where username = ?", username).Scan(&databasePassword)
 
+	if err == sql.ErrNoRows {
+		http.Redirect(res, req, "/stdMessage?mtype=7", 301)
+	}
+
 	if err != nil {
-		// todo: add a info box including "Username not existed"
 		//http.Redirect(res, req, "/stdLogin", 301)
-		http.Error(res,"Cannot Login",500)
+		//http.Error(res, "Cannot Login", 500)
+		http.Redirect(res, req, "/stdMessage?mtype=6", 301)
 		return
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(databasePassword),
 		[]byte(password))
 	if err != nil {
-		// todo: add a info box including "Wrong password"
 		//http.Redirect(res, req, "/stdLogin", 301)
-		http.Error(res,"Cannot Login",500)
+		//http.Error(res, "Cannot Login", 500)
+		http.Redirect(res, req, "/stdMessage?mtype=8", 301)
 		return
 	}
 
 	updateDatehandler, err := DB.Prepare("UPDATE stdusers SET lastlogindate = ? WHERE username = ?")
 	if err != nil {
-		// todo: add a info box to inform loginDate error
 		//http.Redirect(res, req, "/stdLogin", 301)
-		http.Error(res,"Cannot Login",500)
+		//http.Error(res, "Cannot Login", 500)
+		http.Redirect(res, req, "/stdMessage?mtype=6", 301)
 		return
 	}
 
@@ -62,7 +66,8 @@ func StdLogin(res http.ResponseWriter, req *http.Request) {
 	_, err = updateDatehandler.Exec(logindate, username)
 	if err != nil {
 		//http.Redirect(res, req, "/stdLogin", 301)
-		http.Error(res,"Cannot Login",500)
+		//http.Error(res, "Cannot Login", 500)
+		http.Redirect(res, req, "/stdMessage?mtype=6", 301)
 		return
 	}
 
@@ -73,7 +78,7 @@ func StdLogin(res http.ResponseWriter, req *http.Request) {
 
 	//http.SetCookie(res, &cookie)
 
-	session := Session{Username: username, Connection: true, SessionType:Student}
+	session := Session{Username: username, Connection: true, SessionType: Student}
 	(&session).StartSession()
 	go (&session).EndSession()
 

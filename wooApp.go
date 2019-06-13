@@ -44,7 +44,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/views/",http.StripPrefix("/views/",http.FileServer(http.Dir("views"))))
+	mux.Handle("/views/", http.StripPrefix("/views/", http.FileServer(http.Dir("views"))))
 
 	//routers for student users
 	mux.HandleFunc("/", controllers.StdIndex)
@@ -56,6 +56,8 @@ func main() {
 	mux.HandleFunc("/stdLogOut", controllers.StdLogOut)
 	mux.HandleFunc("/stdSignUp", controllers.StdSignUp)
 	mux.HandleFunc("/stdForgotPass", controllers.StdForgotPass)
+	mux.HandleFunc("/stdMessage", controllers.StdMessage)
+	mux.HandleFunc("/stdProfile", controllers.StdProfile)
 
 	//routers for company users
 	mux.HandleFunc("/cpyIndex", controllers.CpyIndex)
@@ -73,6 +75,7 @@ func main() {
 	mux.HandleFunc("/cpyLogOut", controllers.CpyLogOut)
 	mux.HandleFunc("/cpySignUp", controllers.CpySignUp)
 	mux.HandleFunc("/cpyForgotPass", controllers.CpyForgotPass)
+	mux.HandleFunc("/cpyMessage", controllers.CpyMessage)
 
 	server := &http.Server{Addr: ":8080", Handler: mux}
 	fmt.Printf("Server started, listen on port %s\n", server.Addr)

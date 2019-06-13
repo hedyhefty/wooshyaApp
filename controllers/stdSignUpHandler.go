@@ -31,13 +31,15 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 	stduser.Username = GetFromValue(req, "username")
 	ok, err := CheckUserName(stduser.Username)
 	if !ok || err != nil {
-		http.Error(res, "Invalid username.", 500)
+		//http.Error(res, "Invalid username.", 500)
+		http.Redirect(res,req,"/stdMessage?mtype=3",301)
 		return
 	}
 
 	stduser.Password = req.FormValue("password")
 	if len(stduser.Password) < 6 {
-		http.Error(res, "Invalid password.", 500)
+		//http.Error(res, "Invalid password.", 500)
+		http.Redirect(res,req,"/stdMessage?mtype=4",301)
 		return
 	}
 
@@ -47,7 +49,8 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 	stduser.MailAddress = req.FormValue("mailaddress")
 	matched, err := CheckMailAddress(stduser.MailAddress)
 	if !matched || err != nil {
-		http.Error(res, "Invalid mail address.", 500)
+		//http.Error(res, "Invalid mail address.", 500)
+		http.Redirect(res,req,"/stdMessage?mtype=5",301)
 		return
 	}
 
@@ -71,7 +74,8 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 		// Username not exists
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(stduser.Password), bcrypt.DefaultCost)
 		if err != nil {
-			http.Error(res, "Server error, unable to create account", 500)
+			//http.Error(res, "Server error, unable to create account", 500)
+			http.Redirect(res,req,"/stdMessage?mtype=2",301)
 			return
 		}
 
@@ -79,20 +83,22 @@ func StdSignUp(res http.ResponseWriter, req *http.Request) {
 			stduser.Username, hashedPassword, stduser.FirstName, stduser.LastName, stduser.MailAddress, stduser.CollegeName, stduser.Degree, stduser.Department, stduser.Major, stduser.GraduateDate, lastlogindate)
 
 		if err != nil {
-			http.Error(res, "Server error, unable to create account", 500)
+			http.Redirect(res,req,"/stdMessage?mtype=2",301)
+			//http.Error(res, "Server error, unable to create account", 500)
 			return
 		}
-		res.Write([]byte("User Created!"))
-		http.Redirect(res, req, "/", 200)
+		//res.Write([]byte("User Created!"))
+		http.Redirect(res, req, "/stdMessage?mtype=0", http.StatusSeeOther)
 		// return
 
 	case err != nil:
 		// Other error
-		http.Error(res, "Server error, unable to create account", 500)
+		//http.Error(res, "Server error, unable to create account", 500)
+		http.Redirect(res,req,"/stdMessage?mtype=2",301)
 		return
 
 	default:
 		// Username already exists
-		http.Redirect(res, req, "/stdSignUp", 301)
+		http.Redirect(res, req, "/stdMessage?mtype=1", 301)
 	}
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/views/static/stdMessage.css">
+    {{template "bootHeader" . }}
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark text-white">
+    <a class="navbar-brand" href="/">Wooshya!</a>
+</nav>
+<div class="container text-center mbox col-md-3">
+    <div class="container tit">
+        {{.MessageContent}}
+    </div>
+    <div class="container okbtn col-md-5">
+        <a href="{{.RedirectURL}}" class="btn btn-info btn-block">OK</a>
+    </div>
+</div>
+</body>
+</html>

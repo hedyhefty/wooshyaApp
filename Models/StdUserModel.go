@@ -14,6 +14,9 @@ type StdUserModel struct {
 	GraduateDate  string
 	LastLoginDate string
 
+	Hobbies string
+	Skills  string
+
 	//Generate
 	StdURL    string
 	ApplyDate string

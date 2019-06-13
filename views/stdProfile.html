@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {{template "bootHeader" . }}
+    <link rel="stylesheet" href="/views/static/cpyProfile.css">
+    <script src="/views/static/cpyProfile.js"></script>
+    <title></title>
+</head>
+<body>
+{{template "navbar" . }}
+<div class="container" id="displayProfile">
+    <div class="container tit text-center">
+        Profiles page
+    </div>
+    <div class="container protable col-md-5">
+        <table class="table" align="center">
+            <tbody>
+            <tr>
+                <td><b>Name:</b></td>
+                <td>{{.Student.FirstName}} {{.Student.LastName}}</td>
+            </tr>
+            <tr>
+                <td><b>College:</b></td>
+                <td>{{.Student.CollegeName}}</td>
+            </tr>
+            <tr>
+                <td><b>Skills:</b></td>
+                <td>{{.Student.Skills}}</td>
+            </tr>
+            <tr>
+                <td><b>Hobbies:</b></td>
+                <td>{{.Student.Hobbies}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="container text-center">
+        <button id="setprofile" onclick="setProfile()" class="btn btn-info">Set Profile</button>
+    </div>
+
+</div>
+<div class="container text-center" id="settingProfile">
+    <div class="container col-md-5">
+        <div class="container tit">
+            Set your Profile
+        </div>
+        <form method="POST" action="/stdProfile">
+            <div class="form-group">
+                <textarea class="form-control rounded-0" name="skills" rows="3"
+                          placeholder="Please write your skills..."></textarea>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control rounded-0" name="hobbies" rows="3"
+                          placeholder="Please write your hobbies..."></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-info" value="Submit!">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
