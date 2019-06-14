@@ -10,10 +10,22 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+
+    display: flex;
+    flex-direction: column;
 }
 
-.container {
-    margin-top: 5%;
+html {
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    background-color: rgba(50, 50, 50, 0.5);
+    flex-shrink: 0;
 }
 
 .slogan {
@@ -21,9 +33,22 @@ body {
 }
 
 .loginContainer {
-    margin-top: 12%;
+    margin-top: 14%;
 }
 
 .btn-link {
     color: white;
+}
+
+.gowoo {
+    margin-top: 5px;
+    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+    font-size: 1.1rem;
+    color: aliceblue;
+}
+
+
+.licence {
+    color: aliceblue;
+
 }

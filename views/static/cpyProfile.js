@@ -5,3 +5,7 @@ function setProfile() {
     var enable_target = document.getElementById("settingProfile");
     enable_target.style.display = "block";
 }
+
+function goWooshya() {
+    location.href = "/"
+}

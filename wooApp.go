@@ -58,6 +58,7 @@ func main() {
 	mux.HandleFunc("/stdForgotPass", controllers.StdForgotPass)
 	mux.HandleFunc("/stdMessage", controllers.StdMessage)
 	mux.HandleFunc("/stdProfile", controllers.StdProfile)
+	mux.HandleFunc("/stdViewApplied", controllers.StdViewApplied)
 
 	//routers for company users
 	mux.HandleFunc("/cpyIndex", controllers.CpyIndex)

@@ -2,19 +2,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>WOOSHYA! FOR COMPANY USER</title>
+    <title>Heyshya!</title>
     <link rel="stylesheet" href="/views/static/cpyLogin.css">
+    <script src="/views/static/cpyProfile.js"></script>
     {{template "bootHeader" . }}
 </head>
 
 <body>
 <nav class="navbar bg-dark navbar-dark text-white">
 
-    <a class="navbar-brand" href="/cpyIndex">Heyshya!</a>
+    <a class="navbar-brand" href="/cpyIndex"><img src="/views/static/rgbs.png"/>Heyshya!</a>
 
 </nav>
 
-<div class="container text-center text-white">
+<div class="container text-center text-white content">
     <div class="row">
         <div class="container col-sm slogan">
             <h1>Join us, and be more<b>International</b>.</h1>
@@ -47,6 +48,17 @@
         </div>
     </div>
 </div>
+
+<footer class="footer text-center">
+    <div class="container gowoo">
+        You are student?
+        <button onclick="goWooshya()" id="HPbtn" class="btn btn-outline-light">Go Wooshya!</button>
+    </div>
+    <div class="container licence" style="color: aliceblue">
+        Favicon made by
+        <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons" style="color: white">Roundicons</a> from <a href="https://www.flaticon.com/" style="color: white" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" style="color: white" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+    </div>
+</footer>
 
 </body>
 

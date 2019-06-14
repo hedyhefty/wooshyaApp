@@ -2,11 +2,23 @@ body {
     /* The image used */
     background-image: url("/views/static/indexbg.jpg"), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
 
-    /* Full height */
-    height: 100%;
-
     /* Center and scale the image nicely */
     background-size: cover;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+html{
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+.footer {
+    background-color: rgba(50,50,50,0.5);
+    flex-shrink: 0;
 }
 
 .wf {
@@ -20,10 +32,16 @@ body {
 }
 
 .gohey {
-    padding-top: 12%;
+    margin-top: 5px;
     font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
     font-size: 1.1rem;
     color: aliceblue;
+}
+
+
+.licence {
+    color: aliceblue;
+
 }
 
 .searchbar {
