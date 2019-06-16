@@ -1,5 +1,5 @@
 # wooshyaApp
-* Website for international student career in japan.
+* Career website for international student in japan.
 
 * Designed by ST Wang and ZZ Zhang.
 
