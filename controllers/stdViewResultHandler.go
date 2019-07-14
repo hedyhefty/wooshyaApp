@@ -106,8 +106,10 @@ func StdViewResult(w http.ResponseWriter, r *http.Request) {
 
 		var scanhold int
 
-		row := DB.QueryRow("select jid from application where jid=?,stdid=?", application.Jid, application.Stdid)
+		row := DB.QueryRow("select jid from application where jid=? and stdid=?", application.Jid, application.Stdid)
 		err = row.Scan(&scanhold)
+
+		fmt.Println(err)
 
 		if err == sql.ErrNoRows {
 			applydate := time.Now().Local()
