@@ -1,9 +1,12 @@
 # wooshyaApp
-* Website for international student career in japan.
+* Career website for international student in japan.
 
 * Designed by ST Wang and ZZ Zhang.
 
-* Demo URL: https://avian-tract-243308.appspot.com/
+* Demo URL: https://wootestjp.appspot.com/
+
+* Demo image:
+![image](https://github.com/hedyhefty/wooshyaApp/blob/master/HomeDemo.png?raw=true)
 
 ### init setting:
 * You have to install mysql and go get the package below:
